@@ -29,9 +29,10 @@
             alt="Semicolon Logo"
           />
           <div id="menu-navbar">
+            <a href="#" class="menu">Home</a>
             <a href="#" class="menu">About</a>
-            <a href="#" class="menu">Team</a>
-            <a href="#" class="menu">Contact</a>
+            <!-- <a href="#" class="menu">Team</a> -->
+            <a href="#" class="menu">Our Services</a>
             <a href="#" class="menu">Support</a>
           </div>
         </div>
@@ -39,6 +40,33 @@
       <header id="banner">
         <div class="container">
           <h1>Driven by Innovation, Built on Trust</h1>
+        </div>
+        <div id="banner-key-values-container">
+          <h3>Our Key Values</h3>
+          <div id="key-values">
+            <div class="key-value-card">
+              <h3>Integrity</h3>
+              <div class="key-value-icon">
+                <img src="./assets/integrity.svg" alt="" srcset="">
+              </div>
+              <p>We foster transparency, strong relationships, and ethical principles.</p>
+
+            </div>
+            <div class="key-value-card">
+              <h3>Innovation</h3>
+              <div class="key-value-icon">
+                <img src="./assets/innovation.svg" alt="" srcset="">
+              </div>
+              <p>We encourage creativity and new ideas to drive business growth and improvement.</p>
+            </div>
+            <div class="key-value-card">
+              <h3>Commitment</h3>
+              <div class="key-value-icon">
+                <img src="./assets/commitment.svg" alt="" srcset="">
+              </div>
+              <p>We deliver high-value services with responsibility and satisfaction.</p>
+            </div>
+          </div>
         </div>
       </header>
       <section id="services-section" class="web-section">
@@ -100,8 +128,7 @@
       </div>
       <div id="contact-section" class="web-section">
         <div id="title">Talk with us!</div>
-        <div id="cta-text">copywriting thing</div>
-        <button id="cta-button">Book a schedule</button>
+        <a id="cta-button" target="_blank" href="https://calendly.com/inquiries-semicolon/30min">Book a schedule</a>
         <div id="icons-container">
           <a target="_blank" href="mailto:inquiries.semiciolon@gmail.com">
             <img src="./assets/mail-icon.png" alt="Email" id="mail-icon" />
@@ -119,10 +146,24 @@
       </div>
 
       <div id="footer">
+        <div class="container">
+        <div id="footer-menu-wrap">
+          <div id="footer-logo-wrap">
+            <img id="footer-logo" src="./assets/logo-full.png" alt="" srcset="">
+          </div>
+
+          <div id="footer-menu">
+            <li>learn more</li>
+            <li>meet the team</li>
+            <li>privacy policy</li>
+          </div>
+        </div>
         <div id="footer-copyright">
           Copyright &#169; 2024 Semicolon Tech. All rights reserved.
         </div>
+        </div>
       </div>
     <script src="scripts.js"></script>
+    <script src="mobile-menu.js"></script>
   </body>
 </html>

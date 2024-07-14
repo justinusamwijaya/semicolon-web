@@ -38,12 +38,15 @@ body {
   background-color: var(--secondary-color);
   color: var(--primary-color);
   line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  width: 100%;
 }
 
 #page-overlay {
@@ -140,16 +143,89 @@ body {
 }
 
 #banner {
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 150px 20px 50px;
   background-color: var(--primary-color);
   color: var(--secondary-color);
+  overflow-x: hidden;
 }
 
 #banner h1 {
   font-size: 3rem;
   font-weight: 300;
+  text-align: center;
+  width: 100%;
+}
+
+#banner h3 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-align: center;
+  width: 100%;
+}
+
+#banner #banner-key-values-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 50px auto;
+}
+
+#banner #banner-key-values-container #key-values {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#banner #banner-key-values-container #key-values .key-value-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 15px 30px;
+  font-size: 1.6rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+#banner
+  #banner-key-values-container
+  #key-values
+  .key-value-card
+  .key-value-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 0 20px;
+}
+
+#banner
+  #banner-key-values-container
+  #key-values
+  .key-value-card
+  .key-value-icon
+  img {
+  max-width: 100%;
+  max-height: 100%;
+  filter: brightness(0) invert(1);
+}
+
+#banner #banner-key-values-container #key-values .key-value-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+#banner #banner-key-values-container #key-values .key-value-card p {
+  font-size: 1.2rem;
 }
 
 .web-section {
@@ -275,6 +351,7 @@ body {
   color: var(--secondary-color);
   text-align: center;
   padding-bottom: 30px;
+  position: relative;
 }
 
 #contact-section #title {
@@ -286,7 +363,8 @@ body {
   margin-bottom: 30px;
 }
 
-#cta-button {
+#cta-button,
+#cta-button:visited {
   background-color: var(--secondary-color);
   color: var(--primary-color);
   border: none;
@@ -295,7 +373,8 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
+  text-decoration: none;
 }
 
 #cta-button:hover {
@@ -308,6 +387,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px; /* Adds space between icons */
+  margin-top: 50px;
 }
 
 #icons-container img {
@@ -325,20 +405,89 @@ body {
 #footer {
   background-color: var(--primary-color);
   color: var(--secondary-color);
+  padding: 20px;
+}
+
+#footer-logo-wrap {
+  width: 150px;
+  height: 150px;
+}
+
+#footer-logo-wrap #footer-logo {
+  max-width: 100%;
+  max-height: 100%;
+  filter: brightness(0) invert(1); /* Make the icons white */
+}
+
+#footer-menu {
   padding: 20px 0;
 }
 
+#footer-menu li {
+  list-style-type: none;
+  font-size: 12px;
+  font-weight: 300;
+}
+
 #footer-copyright {
-  padding-left: 50px;
   text-align: left;
   font-size: 0.9rem;
   opacity: 0.7;
 }
 
 @media (max-width: 768px) {
+  #menu-navbar {
+    display: none;
+  }
+
+  #mobile-menu-button {
+    display: block;
+  }
+
   .card,
   #our-team-section .profile-card {
     width: calc(50% - 15px);
+  }
+
+  #banner h1 {
+    font-size: 2rem;
+  }
+
+  #banner h3 {
+    font-size: 1.8rem;
+  }
+
+  #banner #banner-key-values-container #key-values .key-value-card {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  #services-section .card-container {
+    justify-content: center;
+  }
+
+  .card {
+    width: calc(50% - 20px);
+    margin: 10px;
+  }
+
+  #footer-menu-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #footer-logo-wrap {
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+  }
+
+  #footer-menu {
+    text-align: center;
+  }
+
+  #footer-copyright {
+    text-align: center;
   }
 }
 
@@ -347,4 +496,86 @@ body {
   #our-team-section .profile-card {
     width: 100%;
   }
+
+  #banner h1 {
+    font-size: 1.8rem;
+  }
+
+  #banner h3 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  #banner #banner-key-values-container #key-values {
+    justify-content: space-around;
+  }
+
+  #banner #banner-key-values-container #key-values .key-value-card {
+    width: calc(50% - 30px);
+  }
+}
+
+@media (min-width: 1201px) {
+  #banner #banner-key-values-container #key-values {
+    justify-content: space-between;
+  }
+
+  #banner #banner-key-values-container #key-values .key-value-card {
+    width: calc(33.33% - 30px);
+  }
+}
+
+/* Add these new styles for the mobile menu */
+#mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+#navbar.scrolled #mobile-menu-button {
+  color: var(--secondary-color);
+}
+
+#mobile-menu {
+  display: none;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#navbar.scrolled #mobile-menu {
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+#mobile-menu .menu {
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+
+#navbar.scrolled #mobile-menu .menu {
+  color: var(--secondary-color);
+}
+
+#mobile-menu .menu:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#navbar.scrolled #mobile-menu .menu:hover {
+  color: rgba(255, 255, 255, 0.3);
 }
