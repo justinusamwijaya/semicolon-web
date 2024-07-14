@@ -1,47 +1,123 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Semicolon</title>
+    <title>Our Services - Semicolon Tech</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./assets/favicon/site.webmanifest">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="ourServices-styles.css" />
   </head>
   <body>
     <div id="page-overlay"></div>
-    <a href="http://wa.me/62818600994?text=Hi saya ingin bertanya tentang "" target="_blank">
-      <div id="floating-buble">
-        <img src="./assets/chat-icon.png" alt="" srcset="">
-      </div>
-    </a>
+
+    <a
+      href="http://wa.me/62818600994?text=Hi%20saya%20ingin%20bertanya%20tentang%20"
+      target="_blank"
+      id="whatsapp-link"
+    ></a>
+
+    <div id="floating-buble">
+      <img src="./assets/chat-icon.png" alt="Chat icon" />
+    </div>
+
     <div id="content-wrapper">
       <nav id="navbar">
         <div class="container">
           <img
-            id="logo"
             src="./assets/semicolon logo.png"
             alt="Semicolon Logo"
+            id="logo"
           />
           <div id="menu-navbar">
             <a href="index.html" class="menu">Home</a>
             <a href="about.html" class="menu">About</a>
-            <!-- <a href="#" class="menu">Team</a> -->
             <a href="ourServices.html" class="menu">Our Services</a>
             <a href="support.html" class="menu">Support</a>
           </div>
         </div>
       </nav>
 
-
-      <header id="page-title">
-        <h1>Our Services</h1>
-      </header>
+      <div id="page-title">
+        <div class="container">
+          <h1>Our Services</h1>
+        </div>
       </div>
-    </body>
+
+      <div class="container">
+        <div class="services-container">
+          <section class="section">
+            <h3>Website Development</h3>
+            <p>
+              Our web development service provides comprehensive solutions to
+              create dynamic, high-performing websites tailored to your business
+              needs. From concept to launch, we ensure your website is visually
+              appealing, user-friendly, and optimized for all devices.
+            </p>
+          </section>
+
+          <section class="section">
+            <h3>ERP</h3>
+            <p>
+              We provide comprehensive software systems designed to integrate
+              and manage all the core processes of a business. It centralizes
+              data and processes across various departments, enabling efficient
+              and streamlined operations.
+            </p>
+          </section>
+
+          <section class="section">
+            <h3>Custom Software / On Demand</h3>
+            <p>
+              Our custom software development service is dedicated to creating
+              tailored solutions that meet your unique business needs. Whether
+              you're looking to streamline operations, enhance customer
+              experience, or introduce new functionalities, our expert team is
+              here to bring your vision to life.
+            </p>
+          </section>
+
+          <section class="section">
+            <h3>Tech Consultation</h3>
+            <p>
+              Our service provides expert guidance to help you navigate the
+              complex world of technology. Whether you need advice on optimizing
+              your IT infrastructure, adopting new technologies, or developing a
+              digital transformation strategy, our experienced consultants are
+              here to assist. You can book our schedule
+              <a
+                href="https://calendly.com/inquiries-semicolon/30min"
+                target="_blank"
+                >here</a
+              >.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div class="container">
+        <div id="footer-menu-wrap">
+          <div id="footer-logo-wrap">
+            <img
+              src="./assets/logo-full.png"
+              alt="Semicolon Tech Logo"
+              id="footer-logo"
+            />
+          </div>
+          <ul id="footer-menu">
+            <li>learn more</li>
+            <li>meet the team</li>
+            <li>privacy policy</li>
+          </ul>
+        </div>
+        <div id="footer-copyright">
+          Copyright © 2024 Semicolon Tech. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="mobile-menu.js"></script>
+  </body>
 </html>

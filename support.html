@@ -1,47 +1,96 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Semicolon</title>
+    <title>Support - Semicolon Tech</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./assets/favicon/site.webmanifest">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="support-styles.css" />
   </head>
   <body>
     <div id="page-overlay"></div>
-    <a href="http://wa.me/62818600994?text=Hi saya ingin bertanya tentang "" target="_blank">
-      <div id="floating-buble">
-        <img src="./assets/chat-icon.png" alt="" srcset="">
-      </div>
-    </a>
+
+    <a
+      href="http://wa.me/62818600994?text=Hi%20saya%20ingin%20bertanya%20tentang%20"
+      target="_blank"
+      id="whatsapp-link"
+    ></a>
+
+    <div id="floating-buble">
+      <img src="./assets/chat-icon.png" alt="Chat icon" />
+    </div>
+
     <div id="content-wrapper">
       <nav id="navbar">
         <div class="container">
           <img
-            id="logo"
             src="./assets/semicolon logo.png"
             alt="Semicolon Logo"
+            id="logo"
           />
           <div id="menu-navbar">
             <a href="index.html" class="menu">Home</a>
             <a href="about.html" class="menu">About</a>
-            <!-- <a href="#" class="menu">Team</a> -->
             <a href="ourServices.html" class="menu">Our Services</a>
             <a href="support.html" class="menu">Support</a>
           </div>
         </div>
       </nav>
 
-
-      <header id="page-title">
-        <h1>Support</h1>
-      </header>
+      <div id="page-title">
+        <div class="container">
+          <h1>Support</h1>
+        </div>
       </div>
-    </body>
+
+      <div class="container">
+        <div class="support-container">
+          <div class="section">
+            <p>
+              Give us a few details and we'll offer the best solution. Connect
+              by phone, chat, email, and more.
+            </p>
+            <form>
+              <input type="text" placeholder="Full Name" required />
+              <input type="text" placeholder="Company" required />
+              <input type="text" placeholder="Role" required />
+              <input type="email" placeholder="Business Email" required />
+              <input type="tel" placeholder="Phone Number" required />
+              <textarea
+                placeholder="How can we help you?"
+                rows="4"
+                required
+              ></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div class="container">
+        <div id="footer-menu-wrap">
+          <div id="footer-logo-wrap">
+            <img
+              src="./assets/logo-full.png"
+              alt="Semicolon Tech Logo"
+              id="footer-logo"
+            />
+          </div>
+          <ul id="footer-menu">
+            <li>learn more</li>
+            <li>meet the team</li>
+            <li>privacy policy</li>
+          </ul>
+        </div>
+        <div id="footer-copyright">
+          Copyright © 2024 Semicolon Tech. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="mobile-menu.js"></script>
+  </body>
 </html>
