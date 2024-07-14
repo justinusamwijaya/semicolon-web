@@ -607,3 +607,8 @@ body {
 #navbar.scrolled #mobile-menu .menu:hover {
   color: rgba(255, 255, 255, 0.3);
 }
+
+#page-title {
+  width: 100%;
+  margin-top: 80px;
+}
