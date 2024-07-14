@@ -55,7 +55,7 @@ textarea:focus {
   border-color: var(--primary-color);
 }
 
-button {
+#btn-submit {
   background-color: var(--primary-color);
   color: var(--secondary-color);
   border: none;
@@ -67,7 +67,7 @@ button {
   align-self: flex-start;
 }
 
-button:hover {
+#btn-submit:hover {
   background-color: #333;
 }
 
@@ -96,7 +96,7 @@ button:hover {
 
   input,
   textarea,
-  button {
+  #btn-submit {
     font-size: 0.9rem;
   }
 }

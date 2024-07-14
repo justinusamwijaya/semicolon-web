@@ -443,8 +443,16 @@ body {
     display: none;
   }
 
-  #mobile-menu-button {
+  #burger-menu {
     display: block;
+  }
+
+  #menu-navbar {
+    display: none;
+  }
+
+  #mobile-menu-button {
+    display: block !important;
   }
 
   .card,
@@ -558,8 +566,13 @@ body {
   }
 }
 
-/* Add these new styles for the mobile menu */
 #mobile-menu-button {
+  display: none;
+  background: none;
+  border: 0;
+}
+
+#burger-menu {
   display: none;
   background: none;
   border: none;
@@ -568,44 +581,33 @@ body {
   cursor: pointer;
 }
 
-#navbar.scrolled #mobile-menu-button {
+#navbar.scrolled #burger-menu {
   color: var(--secondary-color);
 }
 
+/* Mobile menu */
 #mobile-menu {
   display: none;
   position: fixed;
   top: 80px;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 20px;
+  background-color: var(--secondary-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-#navbar.scrolled #mobile-menu {
-  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
 }
 
 #mobile-menu .menu {
   display: block;
-  padding: 10px 0;
+  padding: 15px 20px;
   text-decoration: none;
   color: var(--primary-color);
   font-weight: 300;
-  transition: color 0.3s ease;
-}
-
-#navbar.scrolled #mobile-menu .menu {
-  color: var(--secondary-color);
+  transition: background-color 0.3s ease;
 }
 
 #mobile-menu .menu:hover {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-#navbar.scrolled #mobile-menu .menu:hover {
-  color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 #page-title {
