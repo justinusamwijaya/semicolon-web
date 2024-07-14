@@ -477,6 +477,7 @@ body {
     justify-content: flex-start;
     text-align: left;
     align-items: flex-start;
+    margin-left: 0;
   }
 
   #services-section .card-container {
@@ -499,9 +500,9 @@ body {
     height: 100px;
   }
 
-  #footer-menu {
+  /* #footer-menu {
     text-align: center;
-  }
+  } */
 
   #footer-copyright {
     text-align: center;
