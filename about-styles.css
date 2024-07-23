@@ -24,7 +24,7 @@
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.7s ease, box-shadow 0.7s ease;
 }
 
 .section:hover {

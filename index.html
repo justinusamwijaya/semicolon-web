@@ -4,171 +4,214 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semicolon</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./assets/favicon/site.webmanifest">
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div id="page-overlay"></div>
-    <a href="http://wa.me/62818600994?text=Hi saya ingin bertanya tentang "" target="_blank">
-      <div id="floating-buble">
-        <img src="./assets/chat-icon.png" alt="" srcset="">
-      </div>
-    </a>
-    <div id="content-wrapper">
-      <nav id="navbar">
-    <div class="container">
-        <img src="./assets/semicolon logo.png" alt="Semicolon Logo" id="logo">
-        <div id="menu-navbar">
-            <a href="index.html" class="menu">Home</a>
-            <a href="about.html" class="menu">About</a>
-            <a href="ourServices.html" class="menu">Our Services</a>
-            <a href="support.html" class="menu">Support</a>
+    <!-- navbar section  -->
+    <nav id="navbar">
+      <div class="container">
+        <img id="logo" src="./assets/Logo Text.svg" />
+        <div id="nav-menus">
+          <a class="nav-menu" href="./">About Us</a>
+          <a class="nav-menu" href="./">Services</a>
+          <a class="nav-menu" id="lets-chat" href="./"
+            ><button>Let's Chat</button></a
+          >
         </div>
-        <button id="burger-menu">☰</button>
+        <div id="nav-burger-menu">
+          <img src="./assets/list.svg" alt="" srcset="" />
+        </div>
+      </div>
+    </nav>
+
+    <!-- banner section  -->
+    <div id="banner-section" class="transparent-nav">
+      <div class="hero-banner">
+        <div class="hero-content content-container">
+          <h1>
+            Driven by <span style="color: #0075ff">Innovation</span> <br />
+            Built on <span style="color: #0075ff">Trust</span>
+          </h1>
+          <p>
+            We specialize in creating cutting-edge solutions <br />
+            tailored to your business needs.
+          </p>
+        </div>
+      </div>
     </div>
-</nav>
-<div id="mobile-menu">
-    <a href="index.html" class="menu">Home</a>
-    <a href="about.html" class="menu">About</a>
-    <a href="ourServices.html" class="menu">Our Services</a>
-    <a href="support.html" class="menu">Support</a>
-</div>
 
-
-      
-      <header id="banner">
-        <div class="container">
-          <h1>Driven by Innovation, Built on Trust</h1>
+    <!-- who we are section  -->
+    <div id="who-we-are-section" class="black-nav">
+      <div class="container">
+        <div class="wrapper">
+          <!-- <p class="sm-title">WHO WE ARE</p> -->
+          <h2>
+            We Are A Tech Company Driven by Innovation, Collaboration, and Trust
+          </h2>
+          <p>
+            Our innovative approach fosters creativity and growth, with a
+            steadfast commitment to transparency ensuring high-value,
+            responsible service.
+          </p>
+          <a href="./ourServices.html">Learn More</a>
         </div>
-        <div id="banner-key-values-container">
-          <h3>Our Key Values</h3>
-          <div id="key-values">
-            <div class="key-value-card">
-              <h3>Integrity</h3>
-              <div class="key-value-icon">
-                <img src="./assets/integrity.svg" alt="" srcset="">
-              </div>
-              <p>We foster transparency, strong relationships, and ethical principles.</p>
+      </div>
+    </div>
 
-            </div>
-            <div class="key-value-card">
-              <h3>Innovation</h3>
-              <div class="key-value-icon">
-                <img src="./assets/innovation.svg" alt="" srcset="">
-              </div>
-              <p>We encourage creativity and new ideas to drive business growth and improvement.</p>
-            </div>
-            <div class="key-value-card">
-              <h3>Commitment</h3>
-              <div class="key-value-icon">
-                <img src="./assets/commitment.svg" alt="" srcset="">
-              </div>
-              <p>We deliver high-value services with responsibility and satisfaction.</p>
-            </div>
+    <!-- what we do section -->
+    <section id="what-we-do-section" class="black-nav">
+      <div class="container">
+        <div class="content-container">
+          <h2>
+            We Help Businesses <br />Build Something
+            <span class="blue-accent">Bigger</span>
+          </h2>
+        </div>
+
+        <div id="service-list">
+          <div class="service-card">
+            <img
+              src="./assets/Devices.svg"
+              class="service-img"
+              alt="Custom Web Solutions"
+            />
+            <h3>Custom Web Solutions</h3>
+            <p>
+              Tailored web platforms and applications for your specific business
+              needs.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <img
+              src="./assets/Network.svg"
+              class="service-img"
+              alt="ERP Systems"
+            />
+            <h3>ERP Systems</h3>
+            <p>
+              Integrated software to streamline and optimize core business
+              functions.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <img
+              src="./assets/Cloud.svg"
+              class="service-img"
+              alt="On-Demand Solutions"
+            />
+            <h3>On-Demand Solutions</h3>
+            <p>
+              Instant access to cloud-based resources, adjusting to your needs
+              in real-time.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <img
+              src="./assets/Headset.svg"
+              class="service-img"
+              alt="Tech Consulting"
+            />
+            <h3>Tech Consulting</h3>
+            <p>
+              Expert advice and strategies for optimizing your technology
+              infrastructure.
+            </p>
           </div>
         </div>
-      </header>
-      <section id="services-section" class="web-section">
-        <div class="container">
-          <h2 id="title">Our Services</h2>
-          <div class="card-container">
-            <div class="card">Web System</div>
-            <div class="card">ERP</div>
-            <div class="card">On Demand Solution</div>
-            <div class="card">Tech Consultant</div>
-          </div>
+        <div id="cta-wrapper" class="content-container">
+          <p class="cta-text">Ready to optimize your business operations?</p>
+          <a href="#" class="cta-button">Contact Us</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <div id="team-section" class="web-section">
-        <div id="title">Meet Our Team</div>
-        <div id="our-team-section">
-          <div class="profile-card">
-            <div class="photo">
-              <img src="./assets/joy-photo.jpeg" alt="" srcset="" />
-            </div>
-            <div class="name-n-title">
-              <a
-                target="_blank"
-                href="https://www.linkedin.com/in/joy-daniel-lumalan-aa238a154?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-              >
-                <div class="name">
-                  <div class="linked_in_logo">
-                    <img src="./assets/linkedin_logo.webp" alt="" srcset="" />
-                  </div>
-                  Joy Daniel
-                </div>
-              </a>
-              <div class="title">Co-Founder & COO of Semicolon</div>
-            </div>
-            <div class="description"></div>
+    <!-- how we do it section  -->
+    <div id="how-we-do-it-section" class="black-nav">
+      <div class="container">
+        <div class="content-container">
+          <p class="sm-title">HOW WE DO IT</p>
+          <h2>From Vision to Product</h2>
+        </div>
+        <div id="how-we-do-it-steps">
+          <div id="steps">
+            <li class="step selected">Planning</li>
+            <li class="step">Execution</li>
+            <li class="step">Polishing and Testing</li>
+            <li class="step">Handover</li>
           </div>
-          <div class="profile-card">
-            <div class="photo">
-              <img src="./assets/justin-photo.jpeg" alt="" srcset="" />
+          <div id="explanation-card">
+            <div
+              id="explanation-img"
+              style="background-image: url('./assets/home-step-planning.png')"
+            ></div>
+            <div id="explanation-text-wrapper">
+              <h2 id="explanation-title">Planning</h2>
+              <p id="explanation-text">
+                We identifying and understand your business objectives, scope
+                and requirements before creating a project plan
+              </p>
             </div>
-            <div class="name-n-title">
-              <a
-                target="_blank"
-                href="https://www.linkedin.com/in/justin-wijaya-a2b396169?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-              >
-                <div class="name">
-                  <div class="linked_in_logo">
-                    <img src="./assets/linkedin_logo.webp" alt="" srcset="" />
-                  </div>
-                  Justin Wijaya
-                </div>
-              </a>
-              <div class="title">Co-Founder & CTO of Semicolon</div>
-            </div>
-            <div class="description"></div>
           </div>
         </div>
       </div>
-      <div id="contact-section" class="web-section">
-        <div id="title">Talk with us!</div>
-        <a id="cta-button" target="_blank" href="https://calendly.com/inquiries-semicolon/30min">Book a schedule</a>
-        <div id="icons-container">
-          <a target="_blank" href="mailto:inquiries.semiciolon@gmail.com">
-            <img src="./assets/mail-icon.png" alt="Email" id="mail-icon" />
-          </a>
-          <a target="_blank" href="https://wa.me/62818600994?text=Hi saya ingin bertanya tentang ">
-            <img src="./assets/whatsapp-icon.png" alt="" srcset="">
-          </a>
-          <a target="_blank" href="https://www.linkedin.com/in/semicolon-tech-326375314/">
-            <img src="./assets/linkedin-icon.png" alt="" srcset="">
-          </a>
-          <a target="_blank" href="">
-            <img src="./assets/telegram-icon.png" alt="" srcset="">
-          </a>
+    </div>
+
+    <!-- cta section  -->
+    <div id="cta-section" class="transparent-nav">
+      <h1>
+        Interested in <br />
+        Collaborating With Us?
+      </h1>
+      <p>
+        Schedule a free initial consultation or contact us directly, <br />
+        we will assist you with your business needs. We’re more than a happy to
+        help
+      </p>
+      <div id="cta-buttons">
+        <a href="" id="book-schedule">Book a Schedule</a>
+        <a href="" id="contact-us">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- footer  -->
+    <footer id="footer">
+      <div class="container">
+        <img id="footer-logo" src="./assets/logo-full.svg" alt="" srcset="" />
+        <p id="copyright-text">© Semicolon Tech 2024 All Rights Reserved</p>
+        <div id="footer-menus">
+          <a href="./about.html" class="footer-menu">About Us</a>
+          <a href="./ourServices.html" class="footer-menu">Services</a>
+          <a href="./ourServices.html" class="footer-menu">Privacy</a>
         </div>
       </div>
-
-      <div id="footer">
-        <div class="container">
-        <div id="footer-menu-wrap">
-          <div id="footer-logo-wrap">
-            <img id="footer-logo" src="./assets/logo-full.png" alt="" srcset="">
-          </div>
-
-          <div id="footer-menu">
-            <li>learn more</li>
-            <li>meet the team</li>
-            <li>privacy policy</li>
-          </div>
-        </div>
-        <div id="footer-copyright">
-          Copyright &#169; 2024 Semicolon Tech. All rights reserved.
-        </div>
-        </div>
-      </div>
+    </footer>
     <script src="scripts.js"></script>
-    <script src="mobile-menu.js"></script>
+    <!-- <script src="mobile-menu.js"></script> -->
   </body>
 </html>
