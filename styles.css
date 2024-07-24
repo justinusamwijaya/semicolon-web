@@ -430,6 +430,10 @@ body {
   transition: background-image 0.5s ease;
 }
 
+#mobile-carousel {
+  display: none;
+}
+
 /* cta-section */
 
 #cta-section {
