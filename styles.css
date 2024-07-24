@@ -825,6 +825,14 @@ body {
     text-align: center;
   }
 
+  #who-we-are-section,
+  #what-we-do-section,
+  #how-we-do-it-section,
+  #cta-section {
+    min-height: 30vh;
+    padding-top: 20px;
+  }
+
   #who-we-are-section {
     padding-top: 0;
   }
