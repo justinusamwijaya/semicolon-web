@@ -1,3 +1,14 @@
+function isElementInViewport(el, percentVisible = 30) {
+  let rect = el.getBoundingClientRect();
+  let windowHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+
+  return (
+    rect.top <= windowHeight * (1 - percentVisible / 100) &&
+    rect.bottom >= windowHeight * (percentVisible / 100)
+  );
+}
+
 // Navbar animation
 function updateNavbar() {
   const navbar = document.getElementById("navbar");
@@ -11,8 +22,7 @@ function updateNavbar() {
   }
 
   navSections.forEach((section) => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top <= 100 && rect.bottom >= 100) {
+    if (isElementInViewport(section)) {
       currentSection = section;
     }
   });
