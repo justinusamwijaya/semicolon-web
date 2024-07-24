@@ -140,6 +140,7 @@ const carouselItems = mobileCarousel.querySelector(".carousel-items");
 const carouselDots = mobileCarousel.querySelector(".carousel-dots");
 let currentIndex = 0;
 let startX, moveX;
+let carouselInterval;
 
 function initMobileCarousel() {
   // Create carousel items
@@ -156,12 +157,17 @@ function initMobileCarousel() {
     // Create dot
     const dot = document.createElement("div");
     dot.className = "dot";
-    dot.addEventListener("click", () => goToSlide(index));
+    dot.addEventListener("click", () => {
+      goToSlide(index);
+      stopCarouselRotation();
+      startCarouselRotation();
+    });
     carouselDots.appendChild(dot);
   });
 
   updateCarousel();
   setupTouchListeners();
+  startCarouselRotation();
 }
 
 function updateCarousel() {
@@ -171,14 +177,29 @@ function updateCarousel() {
   });
 }
 
+function startCarouselRotation(seconds = 5000) {
+  carouselInterval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % stepInfo.length;
+    updateCarousel();
+  }, seconds);
+}
+
+function stopCarouselRotation() {
+  clearInterval(carouselInterval);
+}
+
 function goToSlide(index) {
   currentIndex = index;
   updateCarousel();
+  // Restart the rotation timer when manually changing slides
+  stopCarouselRotation();
+  startCarouselRotation(10000);
 }
 
 function setupTouchListeners() {
   carouselItems.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
+    stopCarouselRotation(); // Stop rotation on touch start
   });
 
   carouselItems.addEventListener("touchmove", (e) => {
@@ -193,11 +214,11 @@ function setupTouchListeners() {
   carouselItems.addEventListener("touchend", () => {
     const diff = startX - moveX;
     if (diff > 50 && currentIndex < stepInfo.length - 1) {
-      // Swipe left
       goToSlide(currentIndex + 1);
     } else if (diff < -50 && currentIndex > 0) {
-      // Swipe right
       goToSlide(currentIndex - 1);
+    } else {
+      startCarouselRotation(10000); // Restart rotation if no slide change
     }
   });
 }
@@ -212,7 +233,13 @@ window.addEventListener("resize", () => {
   if (window.innerWidth <= 570) {
     if (carouselItems.children.length === 0) {
       initMobileCarousel();
+    } else {
+      updateCarousel();
+      stopCarouselRotation();
+      startCarouselRotation();
     }
+  } else {
+    stopCarouselRotation(); // Stop rotation when leaving mobile view
   }
 });
 
