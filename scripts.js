@@ -33,6 +33,7 @@ function updateNavbar() {
     }
     if (currentSection.id === "how-we-do-it-section") {
       document.getElementById("explanation-card").className = "scrolled";
+      document.getElementById("mobile-carousel").className = "scrolled";
     }
     // if (currentSection.classList.contains("transparent-nav")) {
     //   navbar.className = "transparent-nav";
@@ -123,3 +124,103 @@ updateNavbar();
 steps[0].classList.add("selected");
 updateExplanationCard(0);
 startRotation();
+
+const mobileCarousel = document.getElementById("mobile-carousel");
+const carouselItems = mobileCarousel.querySelector(".carousel-items");
+const carouselDots = mobileCarousel.querySelector(".carousel-dots");
+let currentIndex = 0;
+let startX, moveX;
+
+function initMobileCarousel() {
+  // Create carousel items
+  stepInfo.forEach((step, index) => {
+    const item = document.createElement("div");
+    item.className = "carousel-item";
+    item.innerHTML = `
+      <div id="explanation-img" style="background-image: url('${step.image}')"></div>
+      <h2>${step.title}</h2>
+      <p>${step.text}</p>
+    `;
+    carouselItems.appendChild(item);
+
+    // Create dot
+    const dot = document.createElement("div");
+    dot.className = "dot";
+    dot.addEventListener("click", () => goToSlide(index));
+    carouselDots.appendChild(dot);
+  });
+
+  updateCarousel();
+  setupTouchListeners();
+}
+
+function updateCarousel() {
+  carouselItems.style.transform = `translateX(-${currentIndex * 100}%)`;
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentIndex);
+  });
+}
+
+function goToSlide(index) {
+  currentIndex = index;
+  updateCarousel();
+}
+
+function setupTouchListeners() {
+  carouselItems.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carouselItems.addEventListener("touchmove", (e) => {
+    moveX = e.touches[0].clientX;
+    const diff = startX - moveX;
+    if (Math.abs(diff) > 5) {
+      // Prevent small unintentional movements
+      e.preventDefault(); // Prevent scrolling
+    }
+  });
+
+  carouselItems.addEventListener("touchend", () => {
+    const diff = startX - moveX;
+    if (diff > 50 && currentIndex < stepInfo.length - 1) {
+      // Swipe left
+      goToSlide(currentIndex + 1);
+    } else if (diff < -50 && currentIndex > 0) {
+      // Swipe right
+      goToSlide(currentIndex - 1);
+    }
+  });
+}
+
+// Initialize mobile carousel
+if (window.innerWidth <= 570) {
+  initMobileCarousel();
+}
+
+// Handle window resize
+window.addEventListener("resize", () => {
+  if (window.innerWidth <= 570) {
+    if (carouselItems.children.length === 0) {
+      initMobileCarousel();
+    }
+  }
+});
+
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById("mobile-menu");
+  const burgerMenuIcon = document.querySelector("#nav-burger-menu img");
+
+  mobileMenu.classList.toggle("opened");
+
+  if (mobileMenu.classList.contains("opened")) {
+    burgerMenuIcon.src = "./assets/X.svg";
+  } else {
+    burgerMenuIcon.src = "./assets/list.svg";
+  }
+}
+
+// The event listener remains the same
+document.addEventListener("DOMContentLoaded", function () {
+  const navBurgerMenu = document.getElementById("nav-burger-menu");
+  navBurgerMenu.addEventListener("click", toggleMobileMenu);
+});

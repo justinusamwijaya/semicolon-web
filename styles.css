@@ -99,6 +99,49 @@ body {
   max-height: 100%;
 }
 
+#mobile-menu {
+  width: 100vw;
+  height: calc(100vh);
+  background: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  display: none;
+  padding-top: 60px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mobile-menu .mobile-menu-element {
+  width: 90%;
+  padding: 16px 0;
+  border-bottom: solid var(--secondary-color) 1px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#mobile-menu .mobile-menu-element a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+#mobile-menu #lets-chat {
+  position: absolute;
+  bottom: 40px;
+  width: 90%;
+}
+
+#mobile-menu #lets-chat button {
+  height: 40px;
+  width: 100%;
+  color: black;
+  background: white;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 #banner-section {
   position: relative;
   height: calc(70vh); /* Extend the banner further */
@@ -206,7 +249,7 @@ body {
   font-size: 48px;
   margin-bottom: 40px;
   width: 100%;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -302,7 +345,7 @@ body {
 }
 
 #how-we-do-it-section h2 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 48px;
 }
 
@@ -582,6 +625,7 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
     text-align: left;
+    line-height: 58px;
   }
 
   #what-we-do-section #service-list {
@@ -731,7 +775,7 @@ body {
   }
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 600px) {
   .content-container {
     margin-left: 16px;
     margin-right: 16px;
@@ -750,29 +794,59 @@ body {
     display: block;
   }
 
+  #mobile-menu.opened {
+    display: flex;
+  }
+
+  #banner-section,
+  .hero-banner {
+    height: 40vh;
+  }
+
   .hero-content {
     padding-top: 0;
   }
 
   .hero-content h1 {
-    font-size: 32px;
+    font-size: 26px;
     text-align: center;
   }
 
   .hero-content p {
     text-align: center;
+    font-size: 14px;
   }
 
   .sm-title {
     text-align: center;
   }
 
+  #who-we-are-section {
+    padding-top: 0;
+  }
+
   #who-we-are-section .wrapper {
     margin: 16px;
   }
 
+  #who-we-are-section h2 {
+    line-height: 30px;
+  }
+
+  #who-we-are-section p {
+    font-size: 14px;
+  }
+
+  #who-we-are-section .container a {
+    margin-top: 0;
+    width: 100%;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
   #what-we-do-section h2 {
     text-align: center;
+    line-height: 30px;
   }
 
   #what-we-do-section #service-list {
@@ -788,6 +862,10 @@ body {
 
   #what-we-do-section .service-card.scrolled {
     transform: translateY(-30px);
+  }
+
+  #what-we-do-section #cta-wrapper {
+    margin-bottom: 20px;
   }
 
   #what-we-do-section .cta-text {
@@ -808,8 +886,85 @@ body {
     padding: 30px 16px;
   }
 
-  #steps {
+  #steps,
+  #explanation-card {
     display: none;
+  }
+
+  #mobile-carousel {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    opacity: 0;
+    bottom: -30px;
+    transition: all 1s;
+  }
+
+  #mobile-carousel.scrolled {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+
+  .carousel-items {
+    display: flex;
+    transition: transform 0.3s ease;
+    overflow: visible;
+  }
+
+  .carousel-item {
+    flex: 0 0 calc(100% - 10px);
+    width: calc(100% - 10px);
+    padding: 24px;
+    margin: 5px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(199, 199, 199, 1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(199, 199, 199, 1);
+    box-shadow: 0px 0px 5px 0px rgba(199, 199, 199, 1);
+  }
+
+  .carousel-item #explanation-img {
+    height: 200px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    filter: grayscale(100%);
+  }
+
+  .carousel-item h2 {
+    color: var(--blue-accent);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .carousel-item p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    width: 24px;
+    border-radius: 12px;
+    background-color: #0075ff;
   }
 
   #how-we-do-it-steps #explanation-card {
@@ -833,7 +988,6 @@ body {
       "a a a"
       "b b b"
       "c c c";
-    justify-content: flex-start;
   }
 
   #footer-menus {
@@ -846,6 +1000,7 @@ body {
 
   #copyright-text {
     grid-area: c;
+    width: 100%;
   }
 
   #footer #footer-logo {
