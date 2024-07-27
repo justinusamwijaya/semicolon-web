@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semicolon</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="partnership-styles.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -65,7 +66,86 @@
       <a id="lets-chat" href="./"><button>Let's Chat</button></a>
     </div>
 
-    <main></main>
+    <main role="main" style="background-color: var(--primary-color)">
+      <div class="partnership-container">
+        <h1 class="partnership-title">
+          Need <span class="highlight">Assistance</span> or
+          <span class="highlight">Collaboration</span>?
+        </h1>
+        <p class="partnership-description">
+          Send us your inquiries and we will help you with your business needs.
+        </p>
+
+        <form class="partnership-form">
+          <div class="form-group needs-group">
+            <label>Your Needs</label>
+            <div class="needs-options">
+              <input
+                type="radio"
+                id="support"
+                name="need_type"
+                value="support"
+              />
+              <label for="support" class="needs-option">Support</label>
+
+              <input
+                type="radio"
+                id="partnership"
+                name="need_type"
+                value="partnership"
+              />
+              <label for="partnership" class="needs-option">Partnership</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Insert your name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="name@email.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+62" />
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company / Brand Name</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              placeholder="Insert your company name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">How can we help you?</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="e.g We want to showcase our products online"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-button">Send Inquiries</button>
+        </form>
+      </div>
+    </main>
     <!-- footer  -->
     <footer id="footer">
       <div class="container">
