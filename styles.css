@@ -133,7 +133,7 @@ main {
   font-size: 14px;
 }
 
-#mobile-menu .mobile-menu-element a {
+#mobile-menu .mobile-menu-element {
   color: var(--secondary-color);
   text-decoration: none;
 }
