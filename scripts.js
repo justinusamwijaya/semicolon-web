@@ -1,4 +1,6 @@
+// Utility function to check if an element is in viewport
 function isElementInViewport(el, percentVisible = 30) {
+  if (!el) return false;
   let rect = el.getBoundingClientRect();
   let windowHeight =
     window.innerHeight || document.documentElement.clientHeight;
@@ -12,6 +14,8 @@ function isElementInViewport(el, percentVisible = 30) {
 // Navbar animation
 function updateNavbar() {
   const navbar = document.getElementById("navbar");
+  if (!navbar) return;
+
   const navSections = document.querySelectorAll(".transparent-nav, .black-nav");
   let currentSection = null;
 
@@ -28,10 +32,8 @@ function updateNavbar() {
   });
 
   if (currentSection) {
-    // console.log({ currentSection: currentSection.id });
     if (currentSection.id === "what-we-do-section") {
       let serviceCards = document.querySelectorAll(".service-card");
-      // console.log({ serviceCards });
       let seconds = 10;
       serviceCards.forEach((el) => {
         setTimeout(() => {
@@ -39,28 +41,20 @@ function updateNavbar() {
         }, seconds);
         seconds += 100;
       });
-      document.getElementById("service-list").className = "scrolled";
+      const serviceList = document.getElementById("service-list");
+      if (serviceList) serviceList.className = "scrolled";
     }
     if (currentSection.id === "how-we-do-it-section") {
-      document.getElementById("explanation-card").className = "scrolled";
-      document.getElementById("mobile-carousel").className = "scrolled";
+      const explanationCard = document.getElementById("explanation-card");
+      const mobileCarousel = document.getElementById("mobile-carousel");
+      if (explanationCard) explanationCard.className = "scrolled";
+      if (mobileCarousel) mobileCarousel.className = "scrolled";
     }
-    // if (currentSection.classList.contains("transparent-nav")) {
-    //   navbar.className = "transparent-nav";
-    // } else if (currentSection.classList.contains("black-nav")) {
-    //   navbar.className = "black-nav";
-    // }
   }
 }
 
 // How We Do It section step rotation
 let currentStepIndex = 0;
-const steps = document.querySelectorAll("#steps li");
-const explanationCard = document.getElementById("explanation-card");
-const explanationImg = document.getElementById("explanation-img");
-const explanationTitle = document.getElementById("explanation-title");
-const explanationText = document.getElementById("explanation-text");
-
 const stepInfo = [
   {
     title: "Planning",
@@ -92,10 +86,13 @@ function startRotation() {
 }
 
 function rotateSteps() {
-  updateStep((currentStepIndex + 1) % steps.length);
+  updateStep((currentStepIndex + 1) % stepInfo.length);
 }
 
 function updateStep(index) {
+  const steps = document.querySelectorAll("#steps li");
+  if (steps.length === 0) return;
+
   steps[currentStepIndex].classList.remove("selected");
   currentStepIndex = index;
   steps[currentStepIndex].classList.add("selected");
@@ -103,46 +100,39 @@ function updateStep(index) {
 }
 
 function updateExplanationCard(index) {
+  const explanationCard = document.getElementById("explanation-card");
+  const explanationImg = document.getElementById("explanation-img");
+  const explanationTitle = document.getElementById("explanation-title");
+  const explanationText = document.getElementById("explanation-text");
+
+  if (
+    !explanationCard ||
+    !explanationImg ||
+    !explanationTitle ||
+    !explanationText
+  )
+    return;
+
   explanationCard.style.opacity = 0;
-  // setTimeout(() => {
   explanationImg.style.backgroundImage = `url('${stepInfo[index].image}')`;
   explanationTitle.textContent = stepInfo[index].title;
   explanationText.textContent = stepInfo[index].text;
   explanationCard.style.opacity = 1;
-  // }, 500);
 }
 
-// Event listeners
-window.addEventListener("scroll", updateNavbar);
-
-// Step interaction
-steps.forEach((step, index) => {
-  step.addEventListener("click", () => {
-    clearInterval(rotationInterval);
-    clearTimeout(rotationTimeout);
-
-    updateStep(index);
-
-    rotationTimeout = setTimeout(() => {
-      startRotation();
-    }, 10000);
-  });
-});
-
-// Initial setup
-updateNavbar();
-steps[0].classList.add("selected");
-updateExplanationCard(0);
-startRotation();
-
-const mobileCarousel = document.getElementById("mobile-carousel");
-const carouselItems = mobileCarousel.querySelector(".carousel-items");
-const carouselDots = mobileCarousel.querySelector(".carousel-dots");
+// Mobile carousel functionality
 let currentIndex = 0;
-let startX, moveX;
 let carouselInterval;
 
 function initMobileCarousel() {
+  const mobileCarousel = document.getElementById("mobile-carousel");
+  if (!mobileCarousel) return;
+
+  const carouselItems = mobileCarousel.querySelector(".carousel-items");
+  const carouselDots = mobileCarousel.querySelector(".carousel-dots");
+
+  if (!carouselItems || !carouselDots) return;
+
   // Create carousel items
   stepInfo.forEach((step, index) => {
     const item = document.createElement("div");
@@ -171,6 +161,11 @@ function initMobileCarousel() {
 }
 
 function updateCarousel() {
+  const carouselItems = document.querySelector(
+    "#mobile-carousel .carousel-items"
+  );
+  if (!carouselItems) return;
+
   carouselItems.style.transform = `translateX(-${currentIndex * 100}%)`;
   document.querySelectorAll(".dot").forEach((dot, index) => {
     dot.classList.toggle("active", index === currentIndex);
@@ -191,23 +186,28 @@ function stopCarouselRotation() {
 function goToSlide(index) {
   currentIndex = index;
   updateCarousel();
-  // Restart the rotation timer when manually changing slides
   stopCarouselRotation();
   startCarouselRotation(10000);
 }
 
 function setupTouchListeners() {
+  const carouselItems = document.querySelector(
+    "#mobile-carousel .carousel-items"
+  );
+  if (!carouselItems) return;
+
+  let startX, moveX;
+
   carouselItems.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
-    stopCarouselRotation(); // Stop rotation on touch start
+    stopCarouselRotation();
   });
 
   carouselItems.addEventListener("touchmove", (e) => {
     moveX = e.touches[0].clientX;
     const diff = startX - moveX;
     if (Math.abs(diff) > 5) {
-      // Prevent small unintentional movements
-      e.preventDefault(); // Prevent scrolling
+      e.preventDefault();
     }
   });
 
@@ -218,34 +218,16 @@ function setupTouchListeners() {
     } else if (diff < -50 && currentIndex > 0) {
       goToSlide(currentIndex - 1);
     } else {
-      startCarouselRotation(10000); // Restart rotation if no slide change
+      startCarouselRotation(10000);
     }
   });
 }
 
-// Initialize mobile carousel
-if (window.innerWidth <= 570) {
-  initMobileCarousel();
-}
-
-// Handle window resize
-window.addEventListener("resize", () => {
-  if (window.innerWidth <= 570) {
-    if (carouselItems.children.length === 0) {
-      initMobileCarousel();
-    } else {
-      updateCarousel();
-      stopCarouselRotation();
-      startCarouselRotation();
-    }
-  } else {
-    stopCarouselRotation(); // Stop rotation when leaving mobile view
-  }
-});
-
 function toggleMobileMenu() {
   const mobileMenu = document.getElementById("mobile-menu");
   const burgerMenuIcon = document.querySelector("#nav-burger-menu img");
+
+  if (!mobileMenu || !burgerMenuIcon) return;
 
   mobileMenu.classList.toggle("opened");
 
@@ -256,8 +238,57 @@ function toggleMobileMenu() {
   }
 }
 
-// The event listener remains the same
+// Event listeners and initialization
 document.addEventListener("DOMContentLoaded", function () {
+  // Common functionality for all pages
+  window.addEventListener("scroll", updateNavbar);
+
   const navBurgerMenu = document.getElementById("nav-burger-menu");
-  navBurgerMenu.addEventListener("click", toggleMobileMenu);
+  if (navBurgerMenu) {
+    navBurgerMenu.addEventListener("click", toggleMobileMenu);
+  }
+
+  // Homepage specific functionality
+  const stepsContainer = document.getElementById("steps");
+  if (stepsContainer) {
+    const steps = stepsContainer.querySelectorAll("li");
+    steps.forEach((step, index) => {
+      step.addEventListener("click", () => {
+        clearInterval(rotationInterval);
+        clearTimeout(rotationTimeout);
+        updateStep(index);
+        rotationTimeout = setTimeout(() => {
+          startRotation();
+        }, 10000);
+      });
+    });
+
+    // Initialize steps rotation
+    steps[0].classList.add("selected");
+    updateExplanationCard(0);
+    startRotation();
+  }
+
+  // Initialize mobile carousel if on mobile
+  if (window.innerWidth <= 570) {
+    initMobileCarousel();
+  }
+
+  // Handle window resize for mobile carousel
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 570) {
+      const carouselItems = document.querySelector(
+        "#mobile-carousel .carousel-items"
+      );
+      if (carouselItems && carouselItems.children.length === 0) {
+        initMobileCarousel();
+      } else {
+        updateCarousel();
+        stopCarouselRotation();
+        startCarouselRotation();
+      }
+    } else {
+      stopCarouselRotation();
+    }
+  });
 });

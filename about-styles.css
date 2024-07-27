@@ -1,89 +1,204 @@
-/* Styles specific to about.html */
-#page-title {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  padding: 100px 0 50px;
-  text-align: center;
+/* we-empower-section */
+#we-empower-section {
+  padding: 80px 14%;
+  /* background-color: #fff; */
 }
 
-#page-title h1 {
-  font-size: 3rem;
-  font-weight: 300;
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  /* padding: 0 20px; */
+}
+
+#we-empower-text {
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+#we-empower-values {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.value-card {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: left;
+  width: 32%;
+  transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+}
+
+.value-img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.value-card h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.value-card p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* our-team-section */
+#our-team-section {
+  padding: 80px 14%;
+  /* background-color: #f8f8f8; */
+}
+
+#our-team-section h2 {
+  text-align: left;
+  font-size: 48px;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.team-members {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 40px; */
+  flex-wrap: wrap;
+}
+
+.team-member-card {
+  /* background-color: #fff; */
+  /* border-radius: 10px; */
+  overflow: hidden;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  width: 416px;
+}
+
+.member-photo {
+  max-width: 100%;
+  /* height: 300px; */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.member-info {
+  padding: 20px;
+}
+
+.member-name {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.linkedin-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.member-name h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.member-info p {
+  font-size: 16px;
+  color: #666;
   margin: 0;
 }
 
-.about-container {
-  display: flex;
-  flex-direction: column;
-  padding: 50px 0;
-}
-
-.section {
-  margin-bottom: 40px;
-  padding: 40px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.7s ease, box-shadow 0.7s ease;
-}
-
-.section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-}
-
-.section h3 {
-  color: var(--primary-color);
-  font-size: 1.8rem;
-  font-weight: 500;
-  margin-bottom: 20px;
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 10px;
-}
-
-.section p {
-  color: #333;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-/* Subtle background colors for alternating sections */
-.section:nth-child(odd) {
-  background-color: #ffffff;
-}
-
-.section:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-@media (max-width: 768px) {
-  #page-title h1 {
-    font-size: 2.5rem;
+/* Responsive design */
+@media screen and (max-width: 1100px) {
+  #we-empower-text {
+    font-size: 20px;
   }
 
-  .section {
-    padding: 30px;
+  .value-card {
+    padding: 32px;
   }
 
-  .section h3 {
-    font-size: 1.6rem;
+  .value-card h3 {
+    font-size: 20px;
+  }
+
+  .team-member-card {
+    width: 45%;
+    max-width: 300px;
+  }
+
+  #our-team-section h2 {
+    font-size: 32px;
   }
 }
 
-@media (max-width: 480px) {
-  #page-title h1 {
-    font-size: 2rem;
+@media screen and (max-width: 769px) {
+  #we-empower-section {
+    padding: 0px 16px;
+    /* background-color: #fff; */
+  }
+  #we-empower-text {
+    font-size: 16px;
   }
 
-  .section {
-    padding: 25px;
+  #we-empower-values {
+    flex-direction: column;
   }
 
-  .section h3 {
-    font-size: 1.4rem;
+  .value-card {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
   }
 
-  .section p {
-    font-size: 0.9rem;
+  .value-img {
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+  }
+
+  .value-card h3 {
+    font-size: 16px;
+  }
+
+  .value-card p {
+    font-size: 14px;
+  }
+
+  .team-members {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-member-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  #our-team-section h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .member-name h3 {
+    font-size: 16px;
+  }
+
+  .member-info p {
+    font-size: 14px;
   }
 }
