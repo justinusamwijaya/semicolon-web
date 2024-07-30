@@ -1,3 +1,10 @@
+:root {
+  --primary-color: #020202;
+  --secondary-color: #f5f5f5;
+  --accent-color: #ddd;
+  --blue-accent: #0075ff;
+}
+
 .service-section {
   padding: 2rem;
 }
