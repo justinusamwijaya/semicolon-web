@@ -2,6 +2,7 @@
 const servicesData = [
   {
     title: "Website Development Services",
+    desc: "Our web development service provides comprehensive solutions to create dynamic, high-performing websites tailored to your business needs. From concept to launch, we ensure your website is visually appealing, user-friendly, and optimized for all devices.",
     content: [
       {
         icon: "Desktop",
@@ -61,6 +62,7 @@ const servicesData = [
   },
   {
     title: "ERP Systems",
+    desc: "We provide the comprehensive software system designed to integrate and manage all the core processes of a business. It centralizes data and processes across various departments, enabling efficient and streamlined operations.",
     content: [
       {
         icon: "Database",
@@ -126,6 +128,7 @@ const servicesData = [
   },
   {
     title: "On Demand Services",
+    desc: "Our custom software development service is dedicated to creating tailored solutions that meet your unique business needs. Whether you’re looking to streamline operations, enhance customer experience, or introduce new functionalities, our expert team is here to bring your vision to life.",
     content: [
       {
         icon: "Code",
@@ -160,6 +163,7 @@ const servicesData = [
   },
   {
     title: "Tech Consultation",
+    desc: "Our service is to provide the experts guidance to help you navigate the complex world of technology. Whether you need advice on optimizing your IT infrastructure, adopting new technologies, or developing a digital transformation strategy, our experienced consultants are here to assist. you can book our schedule <a href='https://calendly.com/inquiries-semicolon/30min'>here</a>",
     content: [
       {
         icon: "Strategy",
@@ -204,7 +208,6 @@ function createServiceItem(item) {
   const iconContainer = document.createElement("div");
   iconContainer.className = "icon-container";
 
-  // Create img element for SVG icon
   const icon = document.createElement("img");
   icon.src = `./assets/${item.icon}.svg`;
   icon.alt = `${item.title} icon`;
@@ -235,9 +238,25 @@ function createServiceSection(service) {
   const section = document.createElement("section");
   section.className = "service-section";
 
+  const headerContainer = document.createElement("div");
+  headerContainer.className = "service-header";
+
   const title = document.createElement("h2");
   title.textContent = service.title;
-  section.appendChild(title);
+
+  const collapseButton = document.createElement("button");
+  collapseButton.className = "collapse-button";
+  collapseButton.setAttribute("aria-label", "Toggle service details");
+
+  headerContainer.appendChild(title);
+  headerContainer.appendChild(collapseButton);
+
+  section.appendChild(headerContainer);
+
+  const desc = document.createElement("p");
+  desc.className = "p-desc";
+  desc.innerHTML = service.desc;
+  section.appendChild(desc);
 
   const servicesGrid = document.createElement("div");
   servicesGrid.className = "services-grid";
@@ -247,6 +266,17 @@ function createServiceSection(service) {
   });
 
   section.appendChild(servicesGrid);
+
+  // Add click event to toggle collapse
+  collapseButton.addEventListener("click", () => {
+    servicesGrid.classList.toggle("collapsed");
+    collapseButton.classList.toggle("collapsed");
+    collapseButton.setAttribute(
+      "aria-expanded",
+      !servicesGrid.classList.contains("collapsed")
+    );
+  });
+
   return section;
 }
 

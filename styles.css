@@ -45,7 +45,33 @@ main {
   height: 120px;
   width: 100%;
   z-index: 9999;
-  transition: all 1s ease-in;
+  background-color: transparent;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: -1;
+}
+
+#navbar.black-nav {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#navbar.black-nav::before {
+  opacity: 1;
 }
 
 #nav-menus {
@@ -61,16 +87,17 @@ main {
 }
 
 #navbar.transparent-nav {
-  background: transparent;
+  background-color: transparent;
 }
 
-#navbar.black-nav {
-  background: linear-gradient(
+/* #navbar.black-nav {
+  background-color: rgba(0, 0, 0, 1);
+  background-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 0.5) 100%
   );
-}
+} */
 
 #navbar .container {
   display: flex;
@@ -83,6 +110,34 @@ main {
 #navbar .nav-menu {
   margin-left: 32px;
   font-size: 16px;
+}
+#navbar .nav-menu {
+  margin-left: 32px;
+  font-size: 16px;
+  position: relative; /* Add this to position the underline */
+}
+
+#navbar .nav-menu,
+#navbar .nav-menu:visited,
+#navbar .nav-menu:focus {
+  color: white;
+  text-decoration: none;
+  border: 0;
+}
+
+/* Add this new rule for the active menu item */
+#navbar .nav-menu.active {
+  position: relative;
+}
+
+#navbar .nav-menu.active::after {
+  content: "";
+  position: absolute;
+  bottom: -50px; /* Adjust this value to position the underline */
+  left: 0;
+  width: 100%;
+  height: 2px; /* Adjust thickness of the underline */
+  background-color: white;
 }
 
 #navbar #lets-chat button {
@@ -587,6 +642,11 @@ main {
   #navbar .nav-menu {
     /* display: none; */
     font-size: 12px;
+  }
+
+  /* Add this to adjust the underline position for smaller screens */
+  #navbar .nav-menu.active::after {
+    bottom: -23px;
   }
 
   #navbar #lets-chat button {

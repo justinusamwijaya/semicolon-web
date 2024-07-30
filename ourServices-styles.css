@@ -7,25 +7,87 @@
 
 .service-section {
   padding: 2rem;
+  margin-bottom: 2rem;
 }
 
-.service-section h2 {
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.service-header h2 {
   font-size: 2rem;
+  margin: 0;
+}
+
+.collapse-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: var(--blue-accent);
+  width: 24px;
+  height: 24px;
+  position: relative;
+  padding: 0;
+}
+
+.collapse-button::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--blue-accent);
+  border-bottom: 2px solid var(--blue-accent);
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+.collapse-button.collapsed::before {
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.content-container {
+  margin: 0 !important;
+}
+
+.p-desc {
+  width: 70%;
   margin-bottom: 2rem;
-  text-align: left;
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  overflow: hidden;
+  max-height: 2000px; /* Adjust this value based on your maximum expected height */
+  opacity: 1;
+  padding: 1rem 0;
+}
+
+.services-grid.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
 }
 
 .service-item {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  text-align: left;
+  flex-direction: column;
   padding: 1rem;
   background-color: #f8f8f8;
   border-radius: 8px;
@@ -40,17 +102,17 @@
 .icon-container {
   flex-shrink: 0;
   margin-right: 1rem;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
-.icon-container i {
-  font-size: 2rem;
-  color: #0075ff;
+.service-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .content-container {
   flex-grow: 1;
-  margin: 0 !important;
 }
 
 .content-container h3 {
@@ -72,5 +134,9 @@
 @media (max-width: 768px) {
   .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  .p-desc {
+    width: 100%;
   }
 }
