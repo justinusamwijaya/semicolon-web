@@ -538,8 +538,9 @@ main {
 }
 
 #footer #copyright-text {
-  color: var(--secondary-color);
-  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+  font-size: 12px;
 }
 
 #footer .footer-menu {
@@ -791,7 +792,7 @@ main {
   #footer #copyright-text {
     margin: 10px 0;
     text-align: center;
-    font-size: 12px;
+    font-size: 10px;
   }
 
   #footer #footer-menus {
@@ -1021,8 +1022,8 @@ main {
     margin: 0 16px;
     display: grid;
     grid-template-areas:
-      "a a a"
       "b b b"
+      "a a a"
       "c c c";
   }
 
@@ -1035,8 +1036,8 @@ main {
   }
 
   #copyright-text {
-    grid-area: c;
     width: 100%;
+    text-align: left !important;
   }
 
   #footer #footer-logo {

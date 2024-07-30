@@ -67,7 +67,7 @@ const stepInfo = [
     image: "./assets/home-step-execution.png",
   },
   {
-    title: "Polishing and Testing",
+    title: "Review",
     text: "We rigorously test and refine the solution to ensure it meets the highest standards of quality and performance.",
     image: "./assets/home-step-review.png",
   },
