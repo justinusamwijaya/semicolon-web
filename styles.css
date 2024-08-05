@@ -623,11 +623,13 @@ main {
   #navbar .nav-menu {
     /* display: none; */
     font-size: 12px;
+    margin-left: 16px;
   }
 
   #navbar #lets-chat button {
     font-size: 12px;
     height: 30px;
+    padding: 0 16px;
   }
 
   /* Hero banner styles */
@@ -836,7 +838,7 @@ main {
   }
 
   #footer #footer-menus a {
-    margin: 0 8px;
+    margin: 0 6px;
   }
 }
 
