@@ -302,11 +302,13 @@ function addImprovedLoadingScreen() {
   overlay.style.left = "0";
   overlay.style.width = "100%";
   overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(255, 255, 255)";
+  overlay.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
   overlay.style.display = "flex";
   overlay.style.justifyContent = "center";
   overlay.style.alignItems = "center";
   overlay.style.zIndex = "9999";
+  overlay.style.opacity = "1";
+  overlay.style.transition = "opacity 0.5s ease-out"; // Add transition for opacity
 
   // Create loading spinner
   const spinner = document.createElement("div");
@@ -380,13 +382,20 @@ function addImprovedLoadingScreen() {
   // Wait for all images to load
   Promise.all(imagePromises)
     .then(() => {
-      // All images are loaded, remove the overlay
-      overlay.style.display = "none";
+      // All images are loaded, fade out the overlay
+      overlay.style.opacity = "0";
+      // Remove the overlay after the transition is complete
+      setTimeout(() => {
+        overlay.style.display = "none";
+      }, 500); // This should match the transition duration
     })
     .catch((error) => {
       console.error("Error loading images:", error);
-      // Remove the overlay even if there's an error, to prevent it from getting stuck
-      overlay.style.display = "none";
+      // Fade out and remove the overlay even if there's an error
+      overlay.style.opacity = "0";
+      setTimeout(() => {
+        overlay.style.display = "none";
+      }, 500);
     });
 }
 
