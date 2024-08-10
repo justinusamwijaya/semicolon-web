@@ -292,3 +292,74 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Add this new function at the end of the file
+
+function addLoadingScreen() {
+  // Create loading overlay
+  const overlay = document.createElement("div");
+  overlay.id = "loading-overlay";
+  overlay.style.position = "fixed";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(255, 255, 255)";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.zIndex = "9999";
+
+  // Create loading spinner
+  const spinner = document.createElement("div");
+  spinner.style.border = "5px solid #f3f3f3";
+  spinner.style.borderTop = "5px solid #3498db";
+  spinner.style.borderRadius = "50%";
+  spinner.style.width = "50px";
+  spinner.style.height = "50px";
+  spinner.style.animation = "spin 1s linear infinite";
+
+  // Add keyframes for spinner animation
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  overlay.appendChild(spinner);
+  document.body.appendChild(overlay);
+
+  // Get all images on the page
+  const images = document.getElementsByTagName("img");
+  let loadedImages = 0;
+
+  // Function to check if all images are loaded
+  function checkImagesLoaded() {
+    loadedImages++;
+    if (loadedImages === images.length) {
+      // All images are loaded, remove the overlay
+      overlay.style.display = "none";
+    }
+  }
+
+  // Check if each image is already loaded or wait for it to load
+  for (let i = 0; i < images.length; i++) {
+    if (images[i].complete) {
+      checkImagesLoaded();
+    } else {
+      images[i].addEventListener("load", checkImagesLoaded);
+      images[i].addEventListener("error", checkImagesLoaded); // Also handle error cases
+    }
+  }
+
+  // If there are no images, remove the overlay immediately
+  if (images.length === 0) {
+    overlay.style.display = "none";
+  }
+}
+
+// Call the function when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", addLoadingScreen);
