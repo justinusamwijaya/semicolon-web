@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function addImprovedLoadingScreen() {
+function addEnhancedLoadingScreen() {
   // Create loading overlay
   const overlay = document.createElement("div");
   overlay.id = "loading-overlay";
@@ -304,11 +304,12 @@ function addImprovedLoadingScreen() {
   overlay.style.height = "100%";
   overlay.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
   overlay.style.display = "flex";
+  overlay.style.flexDirection = "column";
   overlay.style.justifyContent = "center";
   overlay.style.alignItems = "center";
   overlay.style.zIndex = "9999";
   overlay.style.opacity = "1";
-  overlay.style.transition = "opacity 0.5s ease-out"; // Add transition for opacity
+  overlay.style.transition = "opacity 0.5s ease-out";
 
   // Create loading spinner
   const spinner = document.createElement("div");
@@ -318,6 +319,29 @@ function addImprovedLoadingScreen() {
   spinner.style.width = "50px";
   spinner.style.height = "50px";
   spinner.style.animation = "spin 1s linear infinite";
+  spinner.style.marginBottom = "20px";
+
+  // Create progress bar container
+  const progressContainer = document.createElement("div");
+  progressContainer.style.width = "200px";
+  progressContainer.style.height = "20px";
+  progressContainer.style.backgroundColor = "#f3f3f3";
+  progressContainer.style.borderRadius = "10px";
+  progressContainer.style.overflow = "hidden";
+
+  // Create progress bar
+  const progressBar = document.createElement("div");
+  progressBar.style.width = "0%";
+  progressBar.style.height = "100%";
+  progressBar.style.backgroundColor = "#3498db";
+  progressBar.style.transition = "width 0.3s ease-out";
+
+  progressContainer.appendChild(progressBar);
+
+  // Create progress text
+  const progressText = document.createElement("div");
+  progressText.style.marginTop = "10px";
+  progressText.textContent = "0%";
 
   // Add keyframes for spinner animation
   const style = document.createElement("style");
@@ -330,6 +354,8 @@ function addImprovedLoadingScreen() {
   document.head.appendChild(style);
 
   overlay.appendChild(spinner);
+  overlay.appendChild(progressContainer);
+  overlay.appendChild(progressText);
   document.body.appendChild(overlay);
 
   // Function to get all elements with background images
@@ -357,9 +383,31 @@ function addImprovedLoadingScreen() {
     });
   }
 
+  // Function to update progress
+  function updateProgress(loaded, total) {
+    const progress = Math.round((loaded / total) * 100);
+    progressBar.style.width = `${progress}%`;
+    progressText.textContent = `${progress}%`;
+  }
+
+  // Function to get all images, including those in the how-we-do-it section
+  function getAllImages() {
+    const images = [...document.images];
+    const backgroundImageElements = getElementsWithBackgroundImages();
+
+    // Add images from the how-we-do-it section
+    const howWeDoItSection = document.getElementById("how-we-do-it-section");
+    if (howWeDoItSection) {
+      const sectionBackgroundImages =
+        getElementsWithBackgroundImages(howWeDoItSection);
+      backgroundImageElements.push(...sectionBackgroundImages);
+    }
+
+    return { images, backgroundImageElements };
+  }
+
   // Get all images and background images
-  const images = [...document.images];
-  const backgroundImageElements = getElementsWithBackgroundImages();
+  const { images, backgroundImageElements } = getAllImages();
 
   // Create an array of promises for all images to load
   const imagePromises = [
@@ -379,8 +427,18 @@ function addImprovedLoadingScreen() {
     }),
   ];
 
+  const totalImages = imagePromises.length;
+  let loadedImages = 0;
+
   // Wait for all images to load
-  Promise.all(imagePromises)
+  Promise.all(
+    imagePromises.map((p) =>
+      p.then(() => {
+        loadedImages++;
+        updateProgress(loadedImages, totalImages);
+      })
+    )
+  )
     .then(() => {
       // All images are loaded, fade out the overlay
       overlay.style.opacity = "0";
@@ -400,4 +458,4 @@ function addImprovedLoadingScreen() {
 }
 
 // Call the function when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", addImprovedLoadingScreen);
+document.addEventListener("DOMContentLoaded", addEnhancedLoadingScreen);
