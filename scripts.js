@@ -293,9 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Add this new function at the end of the file
-
-function addLoadingScreen() {
+function addImprovedLoadingScreen() {
   // Create loading overlay
   const overlay = document.createElement("div");
   overlay.id = "loading-overlay";
@@ -332,34 +330,65 @@ function addLoadingScreen() {
   overlay.appendChild(spinner);
   document.body.appendChild(overlay);
 
-  // Get all images on the page
-  const images = document.getElementsByTagName("img");
-  let loadedImages = 0;
+  // Function to get all elements with background images
+  function getElementsWithBackgroundImages() {
+    const elements = [];
+    const allElements = document.getElementsByTagName("*");
+    for (let i = 0; i < allElements.length; i++) {
+      const computedStyle = window.getComputedStyle(allElements[i]);
+      const backgroundImage =
+        computedStyle.getPropertyValue("background-image");
+      if (backgroundImage !== "none") {
+        elements.push(allElements[i]);
+      }
+    }
+    return elements;
+  }
 
-  // Function to check if all images are loaded
-  function checkImagesLoaded() {
-    loadedImages++;
-    if (loadedImages === images.length) {
+  // Function to preload an image
+  function preloadImage(url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = url;
+    });
+  }
+
+  // Get all images and background images
+  const images = [...document.images];
+  const backgroundImageElements = getElementsWithBackgroundImages();
+
+  // Create an array of promises for all images to load
+  const imagePromises = [
+    ...images.map((img) => {
+      if (img.complete) return Promise.resolve();
+      return new Promise((resolve) => {
+        img.onload = resolve;
+        img.onerror = resolve; // Resolve on error to prevent the overlay from getting stuck
+      });
+    }),
+    ...backgroundImageElements.map((el) => {
+      const url = window
+        .getComputedStyle(el)
+        .getPropertyValue("background-image")
+        .replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
+      return preloadImage(url);
+    }),
+  ];
+
+  // Wait for all images to load
+  Promise.all(imagePromises)
+    .then(() => {
       // All images are loaded, remove the overlay
       overlay.style.display = "none";
-    }
-  }
-
-  // Check if each image is already loaded or wait for it to load
-  for (let i = 0; i < images.length; i++) {
-    if (images[i].complete) {
-      checkImagesLoaded();
-    } else {
-      images[i].addEventListener("load", checkImagesLoaded);
-      images[i].addEventListener("error", checkImagesLoaded); // Also handle error cases
-    }
-  }
-
-  // If there are no images, remove the overlay immediately
-  if (images.length === 0) {
-    overlay.style.display = "none";
-  }
+    })
+    .catch((error) => {
+      console.error("Error loading images:", error);
+      // Remove the overlay even if there's an error, to prevent it from getting stuck
+      overlay.style.display = "none";
+    });
 }
 
 // Call the function when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", addLoadingScreen);
+document.addEventListener("DOMContentLoaded", addImprovedLoadingScreen);
