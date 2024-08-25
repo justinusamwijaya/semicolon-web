@@ -32,6 +32,45 @@ Dengan tren perkembangan AI yang terus berlanjut, dengan dukungan tenaga ahli ya
 Untuk informasi lebih lanjut tentang layanan Semicolon Tech, silahkan menghubungi kami di inquiries.semicolon@gmail.com atau live consultation disini
 `,
     date: "Jakarta, 06 August 2024; by Semicolon Tech",
+    img: "ai-sct",
+  },
+  {
+    id: "UafaB12Lknbz",
+    date: "Jakarta, 25 August 2024; by Semicolon Tech",
+    title:
+      "Revolusi AI di Indonesia: Bagaimana Bisnis Anda Bisa Mendapatkan Manfaatnya",
+    preview:
+      "Di tengah perkembangan teknologi yang semakin pesat, Indonesia mulai menyaksikan revolusi AI yang mengubah cara bisnis beroperasi di berbagai sektor. AI tidak hanya sekadar trend teknologi; ia telah menjadi komponen integral yang membantu bisnis meningkatkan efisiensi, memberikan pengalaman pelanggan yang lebih baik, dan mengembangkan strategi yang lebih cerdas.",
+    fullContent: `Di tengah perkembangan teknologi yang semakin pesat, Indonesia mulai menyaksikan revolusi AI yang mengubah cara bisnis beroperasi di berbagai sektor. AI tidak hanya sekadar trend teknologi; ia telah menjadi komponen integral yang membantu bisnis meningkatkan efisiensi, memberikan pengalaman pelanggan yang lebih baik, dan mengembangkan strategi yang lebih cerdas.
+<br/><br/>
+
+<h2>Bagaimana Bisnis Mendapatkan Manfaat dari AI ? </h2>
+<ul>
+<li>
+Efisiensi Operasional: AI memungkinkan otomatisasi tugas-tugas rutin, sehingga mengurangi biaya operasional dan waktu yang diperlukan untuk menyelesaikan pekerjaan.
+</li>
+<li>
+Wawasan Pelanggan: Dengan analitik data yang didukung AI, bisnis dapat lebih memahami perilaku pelanggan dan mengembangkan produk atau layanan yang lebih sesuai dengan kebutuhan mereka.
+</li>
+<li>
+Pengalaman Pelanggan yang Ditingkatkan: Chatbot berbasis AI dan personalisasi konten memungkinkan bisnis menawarkan layanan yang lebih responsif dan relevan kepada pelanggan.
+</li>
+<li>
+Keunggulan Kompetitif: Mengadopsi AI memungkinkan bisnis di Indonesia untuk tetap kompetitif di pasar global, dengan inovasi yang terus berkembang dan penerapan teknologi terbaru.
+</li>
+</ul>
+<br/><br/>
+<h2>Tantangan dan Peluang</h2>
+
+Meskipun AI menawarkan banyak keuntungan, masih ada tantangan seperti keterbatasan infrastruktur teknologi, regulasi yang perlu diperbarui, dan kebutuhan akan tenaga kerja yang terampil dalam teknologi AI. Namun, dengan dukungan pemerintah dan peningkatan investasi di sektor ini, Indonesia memiliki potensi besar untuk menjadi salah satu pemain utama dalam revolusi AI di Asia Tenggara.
+Dengan memahami dan mengadopsi teknologi AI, bisnis di Indonesia dapat tidak hanya bertahan, tetapi juga berkembang di era digital ini. Sekarang adalah waktu yang tepat bagi bisnis untuk mengeksplorasi dan berinvestasi dalam teknologi AI guna meraih peluang yang ada di depan mata. 
+<br/><br/>
+
+Dengan tren perkembangan AI yang terus berlanjut, dengan dukungan tenaga ahli yang berpengalaman dan profesional, Semicolon Tech siap untuk membantu bisnis anda untuk layanan integrasi AI untuk mendukung kesuksesan bisnis anda. 
+<br/><br/>
+Untuk informasi lebih lanjut tentang layanan Semicolon Tech, silahkan menghubungi kami di inquiries.semicolon@gmail.com atau live consultation disini
+`,
+    img: "ai-sct2",
   },
   // Add more articles here
 ];
@@ -67,7 +106,7 @@ function renderFullArticle(articleId) {
       <h1 class="article-title">${article.title}</h1>
       <p>${article.date}</p>
       <div class="article-image">
-        <img src="./assets/ai-sct.jpg"/>
+        <img src="./assets/${article.img}.jpg"/>
       </div>
       <div class="article-content">${article.fullContent}</div>
       <a href="?articles" class="back-to-articles">Back to Articles</a>
