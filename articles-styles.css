@@ -104,9 +104,15 @@
   .article-preview .article-read-more-wrapper-preview {
     font-size: 12px;
   }
+
+  .article-preview {
+    width: 100%;
+  }
+
   .articles-wrapper {
     padding: 5%;
     margin-bottom: 10%;
+    flex-wrap: wrap;
   }
 
   .article-title {
