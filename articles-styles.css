@@ -17,30 +17,42 @@
 }
 
 .articles-wrapper {
-  padding: 10% 20%;
+  padding: 10% 5%;
+  display: flex;
+  gap: 20px;
 }
 .articles-wrapper.opened {
   padding: 5%;
 }
 
+.article-preview {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  margin-bottom: 20px;
+  width: 45%;
+}
+
 .article-preview .article-title-preview {
   color: #0075ff;
-  font-size: 24px;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
 .article-preview .article-body-preview {
-  font-size: 24px;
+  font-size: 12px;
   text-align: justify;
 }
 
 .article-preview .article-read-more-wrapper-preview {
   color: #0075ff;
-  font-size: 24px;
+  font-size: 16px;
   text-align: right;
 }
 
 .article-preview .article-read-more {
   text-decoration: none;
+  font-size: 12px;
   color: #0075ff;
 }
 
@@ -69,6 +81,7 @@
 .article-content {
   text-align: justify;
   margin-bottom: 20px;
+  font-size: 12px;
 }
 
 .back-to-articles {
@@ -101,7 +114,7 @@
   }
 
   .article-content {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .article-image {
