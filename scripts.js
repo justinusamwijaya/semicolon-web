@@ -455,7 +455,7 @@ function addEnhancedLoadingScreen() {
   const totalImages = imagePromises.length;
   let loadedImages = 0;
 
-  Wait for all images to load
+  //Wait for all images to load
   Promise.all(
     imagePromises.map((p) =>
       p.then(() => {
