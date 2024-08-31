@@ -281,7 +281,7 @@ function createServiceSection(service) {
   title.textContent = service.title;
 
   const collapseButton = document.createElement("button");
-  collapseButton.className = "collapse-button";
+  collapseButton.className = "collapse-button collapsed";
   collapseButton.setAttribute("aria-label", "Toggle service details");
 
   headerContainer.appendChild(title);
@@ -295,7 +295,7 @@ function createServiceSection(service) {
   section.appendChild(desc);
 
   const servicesGrid = document.createElement("div");
-  servicesGrid.className = "services-grid";
+  servicesGrid.className = "services-grid collapsed";
 
   service.content.forEach((item) => {
     servicesGrid.appendChild(createServiceItem(item));
