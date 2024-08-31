@@ -353,7 +353,17 @@ function addEnhancedLoadingScreen() {
   `;
   document.head.appendChild(style);
 
-  overlay.appendChild(spinner);
+  const logo = document.createElement("div");
+  logo.style.width = "500px";
+  logo.style.height = "50px";
+  logol.style.marginBottom = "20px";
+  logo.style.backgroundImage = `url("./assets/Logo Text.svg")`;
+  logo.style.backgroundSize = "cover";
+  logo.style.backgroundPosition = "center";
+  logo.style.filter = "invert(1) brightness(0)";
+
+  // overlay.appendChild(spinner);
+  overlay.appendChild(logo);
   overlay.appendChild(progressContainer);
   overlay.appendChild(progressText);
   document.body.appendChild(overlay);
