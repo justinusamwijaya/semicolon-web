@@ -1,3 +1,8 @@
+.hero-banner.about {
+  background-image: url("./assets/hero-2.jpg");
+  /* background-color: var(--primary-color); */
+}
+
 :root {
   --primary-color: #020202;
   --secondary-color: #f5f5f5;

@@ -1,3 +1,8 @@
+.hero-banner.about {
+  background-image: url("./assets/hero-2.jpg");
+  /* background-color: var(--primary-color); */
+}
+
 /* we-empower-section */
 #we-empower-section {
   padding: 80px 14%;
