@@ -590,6 +590,21 @@ main {
   color: var(--blue-accent);
 }
 
+/* Custom styles for the chat initiator */
+#hubspot-messages-iframe-container iframe {
+  bottom: 20px !important;
+  right: 20px !important;
+}
+
+#hubspot-messages-iframe-container .shadow-container {
+  display: none !important;
+}
+
+#hubspot-messages-iframe-container .initial-message-bubble {
+  background-color: #ffd700 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
 /* Media query for screens 1000px and below */
 @media screen and (max-width: 1100px) {
   body {
