@@ -199,7 +199,7 @@ const servicesData = [
   },
   {
     title: "Tech Consultation",
-    desc: "Our service is to provide the experts guidance to help you navigate the complex world of technology. Whether you need advice on optimizing your IT infrastructure, adopting new technologies, or developing a digital transformation strategy, our experienced consultants are here to assist. you can book our schedule <a href='https://calendly.com/inquiries-semicolon/30min'>here</a>",
+    desc: "Our service is to provide the experts guidance to help you navigate the complex world of technology. Whether you need advice on optimizing your IT infrastructure, adopting new technologies, or developing a digital transformation strategy, our experienced consultants are here to assist. you can book our schedule <a target='_blank' href='https://calendly.com/inquiries-semicolon/30min'>here</a>",
     content: [
       {
         icon: "Strategy",
