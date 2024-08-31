@@ -60,14 +60,14 @@
 
 /* our-team-section */
 #our-team-section {
-  padding: 80px 14%;
+  padding: 80px 14% 30px 14%;
   /* background-color: #f8f8f8; */
 }
 
 #our-team-section h2 {
   text-align: left;
   font-size: 48px;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
   color: #333;
 }
 
@@ -84,17 +84,23 @@
   overflow: hidden;
   /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   width: 416px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .member-photo {
-  max-width: 100%;
+  max-width: 75%;
   /* height: 300px; */
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 50%;
 }
 
 .member-info {
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .member-name {
