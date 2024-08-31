@@ -324,7 +324,7 @@ function addEnhancedLoadingScreen() {
   // Create progress bar container
   const progressContainer = document.createElement("div");
   progressContainer.style.width = "200px";
-  progressContainer.style.height = "20px";
+  progressContainer.style.height = "5px";
   progressContainer.style.backgroundColor = "#f3f3f3";
   progressContainer.style.borderRadius = "10px";
   progressContainer.style.overflow = "hidden";
