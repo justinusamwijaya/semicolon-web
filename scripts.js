@@ -367,10 +367,12 @@ function addEnhancedLoadingScreen() {
   document.head.appendChild(style);
 
   const logo = document.createElement("div");
-  logo.style.width = "500px";
-  logo.style.height = "50px";
-  logol.style.marginBottom = "20px";
-  logo.style.backgroundImage = `url('data:image/svg+xml,${LOGO_TEXT_SVG}')`;
+  logo.style.width = "200px";
+  logo.style.height = "30px";
+  logo.style.marginBottom = "20px";
+  logo.style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent(
+    LOGO_TEXT_SVG
+  )}")`;
   logo.style.backgroundSize = "cover";
   logo.style.backgroundPosition = "center";
   logo.style.filter = "invert(1) brightness(0)";
@@ -453,7 +455,7 @@ function addEnhancedLoadingScreen() {
   const totalImages = imagePromises.length;
   let loadedImages = 0;
 
-  // Wait for all images to load
+  Wait for all images to load
   Promise.all(
     imagePromises.map((p) =>
       p.then(() => {
