@@ -61,6 +61,42 @@ const servicesData = [
     ],
   },
   {
+    title: "AI Integration",
+    desc: "With AI integration, we can help your business by adding artificial intelligence to your system or products to make them smarter and more efficient. This could involve using AI to automate tasks, analyze data, or improve how the system interacts with users.",
+    content: [
+      {
+        icon: "Database",
+        title: "AI Chatbots and Customer Service",
+        description:
+          "AI chatbots can help companies answer common questions, and handle basic requests without human intervention. They can be deployed on websites, apps, and social media platforms.",
+      },
+      {
+        icon: "Coins",
+        title: "AI-Based Data Analytics and Insights",
+        description:
+          "This process enables your businesses to make data-driven decisions quickly and accurately. By leveraging AI, you can automate data analysis, predict future trends, identify opportunities for growth, and optimize the operational performance.",
+      },
+      {
+        icon: "PersonSimpleCircle",
+        title: "Business Process Automation (RPA) with AI",
+        description:
+          "AI to automate routine and repetitive tasks such as document processing, email management, and data entry",
+      },
+      {
+        icon: "People",
+        title: "AI-Powered Marketing Personalization",
+        description:
+          "AI can be used to analyze customer data and provide personalized product recommendations, ad targeting, and more effective marketing campaigns",
+      },
+      {
+        icon: "Factory",
+        title: "AI for Supply Chain and Logistics Management",
+        description:
+          "AI can optimize supply chain management by predicting demand, optimizing inventory, and managing more efficient delivery routes",
+      },
+    ],
+  },
+  {
     title: "ERP Systems",
     desc: "We provide the comprehensive software system designed to integrate and manage all the core processes of a business. It centralizes data and processes across various departments, enabling efficient and streamlined operations.",
     content: [

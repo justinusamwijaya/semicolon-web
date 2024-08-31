@@ -29,7 +29,7 @@ Namun tantangan ini juga membawa peluang besar. Perkembangan AI di Indonesia dap
 Dengan tren perkembangan AI yang terus berlanjut, dengan dukungan tenaga ahli yang berpengalaman dan profesional, Semicolon Tech siap untuk membantu bisnis anda untuk layanan integrasi AI untuk mendukung kesuksesan bisnis anda. 
 
 <br/><br/>
-Untuk informasi lebih lanjut tentang layanan Semicolon Tech, silahkan menghubungi kami di inquiries.semicolon@gmail.com atau live consultation disini
+Untuk informasi lebih lanjut tentang layanan Semicolon Tech, silahkan menghubungi kami di inquiries.semicolon@gmail.com atau live consultation <a target="_blank" href="https://wa.me/62818600994">disini</a>
 `,
     date: "Jakarta, 06 August 2024; by Semicolon Tech",
     img: "ai-sct",
@@ -68,7 +68,7 @@ Dengan memahami dan mengadopsi teknologi AI, bisnis di Indonesia dapat tidak han
 
 Dengan tren perkembangan AI yang terus berlanjut, dengan dukungan tenaga ahli yang berpengalaman dan profesional, Semicolon Tech siap untuk membantu bisnis anda untuk layanan integrasi AI untuk mendukung kesuksesan bisnis anda. 
 <br/><br/>
-Untuk informasi lebih lanjut tentang layanan Semicolon Tech, silahkan menghubungi kami di inquiries.semicolon@gmail.com atau live consultation disini
+Untuk informasi lebih lanjut tentang layanan Semicolon Tech, silahkan menghubungi kami di inquiries.semicolon@gmail.com atau live consultation <a target="_blank" href="https://wa.me/62818600994">disini</a>
 `,
     img: "ai-sct2",
   },
