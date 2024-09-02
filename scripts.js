@@ -372,12 +372,6 @@ function removeBannerLoadingScreen(overlay) {
 
 // Function to add enhanced shimmering effect to unloaded images
 function addEnhancedShimmeringEffect(element) {
-  const wrapper = document.createElement("div");
-  wrapper.style.position = "relative";
-  wrapper.style.width = "100%";
-  wrapper.style.height = "100%";
-  wrapper.style.backgroundColor = "#e0e0e0"; // Gray background
-
   const shimmer = document.createElement("div");
   shimmer.classList.add("shimmer-effect");
   shimmer.style.position = "absolute";
@@ -385,6 +379,7 @@ function addEnhancedShimmeringEffect(element) {
   shimmer.style.left = "0";
   shimmer.style.width = "100%";
   shimmer.style.height = "100%";
+  shimmer.style.backgroundColor = "#e0e0e0"; // Gray background
   shimmer.style.backgroundImage = `
     linear-gradient(
       to right,
@@ -395,12 +390,10 @@ function addEnhancedShimmeringEffect(element) {
   `;
   shimmer.style.backgroundSize = "200% 100%";
   shimmer.style.animation = "shimmer 1.5s infinite";
+  shimmer.style.zIndex = "1";
 
-  wrapper.appendChild(shimmer);
-
-  // Replace the content of the element with the wrapper
-  element.innerHTML = "";
-  element.appendChild(wrapper);
+  element.style.position = "relative";
+  element.appendChild(shimmer);
 
   // Add keyframes for enhanced shimmer animation if not already added
   if (!document.querySelector("style[data-shimmer-style]")) {
@@ -423,17 +416,55 @@ function addEnhancedShimmeringEffect(element) {
     document.head.appendChild(style);
   }
 
-  return wrapper;
+  return shimmer;
 }
 
-// Function to remove shimmering effect and set the loaded image
-function setLoadedImage(element, imageUrl) {
-  element.style.backgroundImage = `url(${imageUrl})`;
-  element.style.backgroundColor = "transparent";
-  const shimmerWrapper = element.querySelector("div");
-  if (shimmerWrapper) {
-    element.removeChild(shimmerWrapper);
+// Function to remove shimmering effect
+function removeShimmeringEffect(element) {
+  const shimmer = element.querySelector(".shimmer-effect");
+  if (shimmer) {
+    element.removeChild(shimmer);
   }
+}
+
+// Function to handle image loading with shimmering effect
+function handleImageLoading(element, imageUrl) {
+  // Add shimmering effect
+  const shimmer = addEnhancedShimmeringEffect(element);
+
+  const img = new Image();
+  img.onload = () => {
+    element.style.backgroundImage = `url(${imageUrl})`;
+    removeShimmeringEffect(element);
+  };
+  img.onerror = () => {
+    console.error(`Failed to load image: ${imageUrl}`);
+    removeShimmeringEffect(element);
+  };
+  img.src = imageUrl;
+}
+
+// Function to observe changes in background image
+function observeBackgroundImageChanges(element) {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "style"
+      ) {
+        const newBackgroundImage = element.style.backgroundImage;
+        if (newBackgroundImage && newBackgroundImage !== "none") {
+          const imageUrl = newBackgroundImage.replace(
+            /url\(['"]?(.*?)['"]?\)/i,
+            "$1"
+          );
+          handleImageLoading(element, imageUrl);
+        }
+      }
+    });
+  });
+
+  observer.observe(element, { attributes: true, attributeFilter: ["style"] });
 }
 
 // Function to handle image loading with shimmering effect
@@ -495,7 +526,12 @@ function handleLoadingEffects() {
       '[id^="explanation-img"]'
     );
     imageElements.forEach((element) => {
-      handleImageLoading(element);
+      const bgImage = window
+        .getComputedStyle(element)
+        .getPropertyValue("background-image");
+      const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
+      handleImageLoading(element, imageUrl);
+      observeBackgroundImageChanges(element);
     });
   }
 }
