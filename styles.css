@@ -563,7 +563,7 @@ main {
 .mini-icons {
   position: absolute;
   top: -40px;
-  z-index: 9999;
+  z-index: 999;
   left: 80px;
   display: flex;
   gap: 20px;

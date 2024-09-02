@@ -306,65 +306,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function addEnhancedLoadingScreen() {
-  // Create loading overlay
+// Function to add loading screen for banner
+function addBannerLoadingScreen() {
   const overlay = document.createElement("div");
-  overlay.id = "loading-overlay";
-  overlay.style.position = "fixed";
+  overlay.id = "banner-loading-overlay";
+  overlay.style.position = "absolute";
   overlay.style.top = "0";
   overlay.style.left = "0";
   overlay.style.width = "100%";
-  overlay.style.height = "100%";
+  overlay.style.height = "600px"; // Match the height of your banner
   overlay.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
   overlay.style.display = "flex";
   overlay.style.flexDirection = "column";
   overlay.style.justifyContent = "center";
   overlay.style.alignItems = "center";
-  overlay.style.zIndex = "9999";
-  overlay.style.opacity = "1";
-  overlay.style.transition = "opacity 0.5s ease-out";
-
-  // Create loading spinner
-  const spinner = document.createElement("div");
-  spinner.style.border = "5px solid #f3f3f3";
-  spinner.style.borderTop = "5px solid #3498db";
-  spinner.style.borderRadius = "50%";
-  spinner.style.width = "50px";
-  spinner.style.height = "50px";
-  spinner.style.animation = "spin 1s linear infinite";
-  spinner.style.marginBottom = "20px";
-
-  // Create progress bar container
-  const progressContainer = document.createElement("div");
-  progressContainer.style.width = "200px";
-  progressContainer.style.height = "5px";
-  progressContainer.style.backgroundColor = "#f3f3f3";
-  progressContainer.style.borderRadius = "10px";
-  progressContainer.style.overflow = "hidden";
-
-  // Create progress bar
-  const progressBar = document.createElement("div");
-  progressBar.style.width = "0%";
-  progressBar.style.height = "100%";
-  progressBar.style.backgroundColor = "#3498db";
-  progressBar.style.transition = "width 0.3s ease-out";
-
-  progressContainer.appendChild(progressBar);
-
-  // Create progress text
-  const progressText = document.createElement("div");
-  progressText.style.marginTop = "10px";
-  progressText.textContent = "0%";
-
-  // Add keyframes for spinner animation
-  const style = document.createElement("style");
-  style.textContent = `
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  `;
-  document.head.appendChild(style);
+  overlay.style.zIndex = "9998";
 
   const logo = document.createElement("div");
   logo.style.width = "200px";
@@ -377,110 +333,136 @@ function addEnhancedLoadingScreen() {
   logo.style.backgroundPosition = "center";
   logo.style.filter = "invert(1) brightness(0)";
 
-  // overlay.appendChild(spinner);
+  const spinner = document.createElement("div");
+  spinner.style.border = "5px solid #f3f3f3";
+  spinner.style.borderTop = "5px solid #3498db";
+  spinner.style.borderRadius = "50%";
+  spinner.style.width = "50px";
+  spinner.style.height = "50px";
+  spinner.style.animation = "spin 1s linear infinite";
+
   overlay.appendChild(logo);
-  overlay.appendChild(progressContainer);
-  overlay.appendChild(progressText);
+  overlay.appendChild(spinner);
   document.body.appendChild(overlay);
 
-  // Function to get all elements with background images
-  function getElementsWithBackgroundImages() {
-    const elements = [];
-    const allElements = document.getElementsByTagName("*");
-    for (let i = 0; i < allElements.length; i++) {
-      const computedStyle = window.getComputedStyle(allElements[i]);
-      const backgroundImage =
-        computedStyle.getPropertyValue("background-image");
-      if (backgroundImage !== "none") {
-        elements.push(allElements[i]);
+  // Add keyframes for spinner animation if not already added
+  if (!document.querySelector("style[data-spinner-style]")) {
+    const style = document.createElement("style");
+    style.setAttribute("data-spinner-style", "");
+    style.textContent = `
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
-    }
-    return elements;
+    `;
+    document.head.appendChild(style);
   }
 
-  // Function to preload an image
-  function preloadImage(url) {
-    return new Promise((resolve, reject) => {
+  return overlay;
+}
+
+// Function to remove banner loading screen
+function removeBannerLoadingScreen(overlay) {
+  overlay.style.opacity = "0";
+  overlay.style.transition = "opacity 0.5s ease-out";
+  setTimeout(() => {
+    overlay.remove();
+  }, 500);
+}
+
+// Function to add shimmering effect to unloaded images
+function addShimmeringEffect(element) {
+  element.style.position = "relative";
+  element.style.overflow = "hidden";
+
+  const shimmer = document.createElement("div");
+  shimmer.style.position = "absolute";
+  shimmer.style.top = "0";
+  shimmer.style.left = "0";
+  shimmer.style.width = "100%";
+  shimmer.style.height = "100%";
+  shimmer.style.background =
+    "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)";
+  shimmer.style.animation = "shimmer 1.5s infinite";
+
+  element.appendChild(shimmer);
+
+  // Add keyframes for shimmer animation if not already added
+  if (!document.querySelector("style[data-shimmer-style]")) {
+    const style = document.createElement("style");
+    style.setAttribute("data-shimmer-style", "");
+    style.textContent = `
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  return shimmer;
+}
+
+// Function to remove shimmering effect
+function removeShimmeringEffect(element, shimmer) {
+  if (shimmer && element.contains(shimmer)) {
+    element.removeChild(shimmer);
+  }
+}
+
+// Main function to handle loading and shimmering effects
+function handleLoadingEffects() {
+  const bannerOverlay = addBannerLoadingScreen();
+  const bannerImage = document.querySelector(".hero-banner");
+
+  // Handle banner image loading
+  if (bannerImage) {
+    const bannerBgImage = window
+      .getComputedStyle(bannerImage)
+      .getPropertyValue("background-image");
+    const bannerImageUrl = bannerBgImage.replace(
+      /url\(['"]?(.*?)['"]?\)/i,
+      "$1"
+    );
+
+    const img = new Image();
+    img.onload = () => {
+      removeBannerLoadingScreen(bannerOverlay);
+    };
+    img.onerror = () => {
+      console.error("Failed to load banner image");
+      removeBannerLoadingScreen(bannerOverlay);
+    };
+    img.src = bannerImageUrl;
+  } else {
+    removeBannerLoadingScreen(bannerOverlay);
+  }
+
+  // Handle "How We Do It" section images
+  const howWeDoItSection = document.getElementById("how-we-do-it-section");
+  if (howWeDoItSection) {
+    const imageElements = howWeDoItSection.querySelectorAll(
+      '[id^="explanation-img"]'
+    );
+    imageElements.forEach((element) => {
+      const shimmer = addShimmeringEffect(element);
+      const bgImage = window
+        .getComputedStyle(element)
+        .getPropertyValue("background-image");
+      const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
+
       const img = new Image();
-      img.onload = resolve;
-      img.onerror = reject;
-      img.src = url;
+      img.onload = () => {
+        removeShimmeringEffect(element, shimmer);
+      };
+      img.onerror = () => {
+        console.error(`Failed to load image: ${imageUrl}`);
+        removeShimmeringEffect(element, shimmer);
+      };
+      img.src = imageUrl;
     });
   }
-
-  // Function to update progress
-  function updateProgress(loaded, total) {
-    const progress = Math.round((loaded / total) * 100);
-    progressBar.style.width = `${progress}%`;
-    progressText.textContent = `${progress}%`;
-  }
-
-  // Function to get all images, including those in the how-we-do-it section
-  function getAllImages() {
-    const images = [...document.images];
-    const backgroundImageElements = getElementsWithBackgroundImages();
-
-    // Add images from the how-we-do-it section
-    const howWeDoItSection = document.getElementById("how-we-do-it-section");
-    if (howWeDoItSection) {
-      const sectionBackgroundImages =
-        getElementsWithBackgroundImages(howWeDoItSection);
-      backgroundImageElements.push(...sectionBackgroundImages);
-    }
-
-    return { images, backgroundImageElements };
-  }
-
-  // Get all images and background images
-  const { images, backgroundImageElements } = getAllImages();
-
-  // Create an array of promises for all images to load
-  const imagePromises = [
-    ...images.map((img) => {
-      if (img.complete) return Promise.resolve();
-      return new Promise((resolve) => {
-        img.onload = resolve;
-        img.onerror = resolve; // Resolve on error to prevent the overlay from getting stuck
-      });
-    }),
-    ...backgroundImageElements.map((el) => {
-      const url = window
-        .getComputedStyle(el)
-        .getPropertyValue("background-image")
-        .replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
-      return preloadImage(url);
-    }),
-  ];
-
-  const totalImages = imagePromises.length;
-  let loadedImages = 0;
-
-  //Wait for all images to load
-  Promise.all(
-    imagePromises.map((p) =>
-      p.then(() => {
-        loadedImages++;
-        updateProgress(loadedImages, totalImages);
-      })
-    )
-  )
-    .then(() => {
-      // All images are loaded, fade out the overlay
-      overlay.style.opacity = "0";
-      // Remove the overlay after the transition is complete
-      setTimeout(() => {
-        overlay.style.display = "none";
-      }, 500); // This should match the transition duration
-    })
-    .catch((error) => {
-      console.error("Error loading images:", error);
-      // Fade out and remove the overlay even if there's an error
-      overlay.style.opacity = "0";
-      setTimeout(() => {
-        overlay.style.display = "none";
-      }, 500);
-    });
 }
 
 // Call the function when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", addEnhancedLoadingScreen);
+document.addEventListener("DOMContentLoaded", handleLoadingEffects);
