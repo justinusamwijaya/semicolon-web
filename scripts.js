@@ -310,17 +310,17 @@ document.addEventListener("DOMContentLoaded", function () {
 function addBannerLoadingScreen() {
   const overlay = document.createElement("div");
   overlay.id = "banner-loading-overlay";
-  overlay.style.position = "fixed";
+  overlay.style.position = "absolute";
   overlay.style.top = "0";
   overlay.style.left = "0";
   overlay.style.width = "100vw";
   overlay.style.height = "100vh"; // Match the height of your banner
-  overlay.style.backgroundColor = "rgba(255, 255, 255, .8)";
+  overlay.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
   overlay.style.display = "flex";
   overlay.style.flexDirection = "column";
   overlay.style.justifyContent = "center";
   overlay.style.alignItems = "center";
-  overlay.style.zIndex = "9998";
+  overlay.style.zIndex = "10000";
 
   const logo = document.createElement("div");
   logo.style.width = "200px";
@@ -467,11 +467,23 @@ function handleLoadingEffects() {
 
   // Handle banner image loading
   if (bannerImage) {
-    handleImageLoading(bannerImage);
-    // Remove banner overlay when the image is loaded
-    bannerImage.addEventListener("load", () => {
+    const bannerBgImage = window
+      .getComputedStyle(bannerImage)
+      .getPropertyValue("background-image");
+    const bannerImageUrl = bannerBgImage.replace(
+      /url\(['"]?(.*?)['"]?\)/i,
+      "$1"
+    );
+
+    const img = new Image();
+    img.onload = () => {
       removeBannerLoadingScreen(bannerOverlay);
-    });
+    };
+    img.onerror = () => {
+      console.error("Failed to load banner image");
+      removeBannerLoadingScreen(bannerOverlay);
+    };
+    img.src = bannerImageUrl;
   } else {
     removeBannerLoadingScreen(bannerOverlay);
   }
