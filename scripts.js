@@ -131,6 +131,8 @@ function updateExplanationCard(index) {
   explanationTitle.textContent = stepInfo[index].title;
   explanationText.textContent = stepInfo[index].text;
   explanationCard.style.opacity = 1;
+
+  handleImageLoading(explanationCard);
 }
 
 // Mobile carousel functionality
