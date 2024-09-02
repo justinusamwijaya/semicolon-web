@@ -313,9 +313,9 @@ function addBannerLoadingScreen() {
   overlay.style.position = "absolute";
   overlay.style.top = "0";
   overlay.style.left = "0";
-  overlay.style.width = "100%";
-  overlay.style.height = "600px"; // Match the height of your banner
-  overlay.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+  overlay.style.width = "100vw";
+  overlay.style.height = "600vh"; // Match the height of your banner
+  overlay.style.backgroundColor = "rgba(255, 255, 255, 1)";
   overlay.style.display = "flex";
   overlay.style.flexDirection = "column";
   overlay.style.justifyContent = "center";
@@ -370,31 +370,47 @@ function removeBannerLoadingScreen(overlay) {
   }, 500);
 }
 
-// Function to add shimmering effect to unloaded images
-function addShimmeringEffect(element) {
+// Function to add enhanced shimmering effect to unloaded images
+function addEnhancedShimmeringEffect(element) {
   element.style.position = "relative";
   element.style.overflow = "hidden";
 
   const shimmer = document.createElement("div");
+  shimmer.classList.add("shimmer-effect");
   shimmer.style.position = "absolute";
   shimmer.style.top = "0";
   shimmer.style.left = "0";
   shimmer.style.width = "100%";
   shimmer.style.height = "100%";
-  shimmer.style.background =
-    "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)";
+  shimmer.style.backgroundImage = `
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    )
+  `;
+  shimmer.style.backgroundSize = "200% 100%";
   shimmer.style.animation = "shimmer 1.5s infinite";
 
   element.appendChild(shimmer);
 
-  // Add keyframes for shimmer animation if not already added
+  // Add keyframes for enhanced shimmer animation if not already added
   if (!document.querySelector("style[data-shimmer-style]")) {
     const style = document.createElement("style");
     style.setAttribute("data-shimmer-style", "");
     style.textContent = `
       @keyframes shimmer {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      .shimmer-effect {
+        pointer-events: none;
       }
     `;
     document.head.appendChild(style);
@@ -445,7 +461,7 @@ function handleLoadingEffects() {
       '[id^="explanation-img"]'
     );
     imageElements.forEach((element) => {
-      const shimmer = addShimmeringEffect(element);
+      const shimmer = addEnhancedShimmeringEffect(element);
       const bgImage = window
         .getComputedStyle(element)
         .getPropertyValue("background-image");
