@@ -315,7 +315,7 @@ function addBannerLoadingScreen() {
   overlay.style.left = "0";
   overlay.style.width = "100vw";
   overlay.style.height = "600vh"; // Match the height of your banner
-  overlay.style.backgroundColor = "rgba(255, 255, 255, 1)";
+  overlay.style.backgroundColor = "rgba(255, 255, 255, .8)";
   overlay.style.display = "flex";
   overlay.style.flexDirection = "column";
   overlay.style.justifyContent = "center";
@@ -372,8 +372,11 @@ function removeBannerLoadingScreen(overlay) {
 
 // Function to add enhanced shimmering effect to unloaded images
 function addEnhancedShimmeringEffect(element) {
-  element.style.position = "relative";
-  element.style.overflow = "hidden";
+  const wrapper = document.createElement("div");
+  wrapper.style.position = "relative";
+  wrapper.style.width = "100%";
+  wrapper.style.height = "100%";
+  wrapper.style.backgroundColor = "#e0e0e0"; // Gray background
 
   const shimmer = document.createElement("div");
   shimmer.classList.add("shimmer-effect");
@@ -386,14 +389,18 @@ function addEnhancedShimmeringEffect(element) {
     linear-gradient(
       to right,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.5) 50%,
       rgba(255, 255, 255, 0) 100%
     )
   `;
   shimmer.style.backgroundSize = "200% 100%";
   shimmer.style.animation = "shimmer 1.5s infinite";
 
-  element.appendChild(shimmer);
+  wrapper.appendChild(shimmer);
+
+  // Replace the content of the element with the wrapper
+  element.innerHTML = "";
+  element.appendChild(wrapper);
 
   // Add keyframes for enhanced shimmer animation if not already added
   if (!document.querySelector("style[data-shimmer-style]")) {
@@ -416,14 +423,41 @@ function addEnhancedShimmeringEffect(element) {
     document.head.appendChild(style);
   }
 
-  return shimmer;
+  return wrapper;
 }
 
-// Function to remove shimmering effect
-function removeShimmeringEffect(element, shimmer) {
-  if (shimmer && element.contains(shimmer)) {
-    element.removeChild(shimmer);
+// Function to remove shimmering effect and set the loaded image
+function setLoadedImage(element, imageUrl) {
+  element.style.backgroundImage = `url(${imageUrl})`;
+  element.style.backgroundColor = "transparent";
+  const shimmerWrapper = element.querySelector("div");
+  if (shimmerWrapper) {
+    element.removeChild(shimmerWrapper);
   }
+}
+
+// Function to handle image loading with shimmering effect
+function handleImageLoading(element) {
+  const bgImage = window
+    .getComputedStyle(element)
+    .getPropertyValue("background-image");
+  const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
+
+  // Remove any existing background image
+  element.style.backgroundImage = "none";
+
+  // Add shimmering effect
+  addEnhancedShimmeringEffect(element);
+
+  const img = new Image();
+  img.onload = () => {
+    setLoadedImage(element, imageUrl);
+  };
+  img.onerror = () => {
+    console.error(`Failed to load image: ${imageUrl}`);
+    // Optionally, you can set a placeholder image or leave the shimmer effect
+  };
+  img.src = imageUrl;
 }
 
 // Main function to handle loading and shimmering effects
@@ -433,23 +467,11 @@ function handleLoadingEffects() {
 
   // Handle banner image loading
   if (bannerImage) {
-    const bannerBgImage = window
-      .getComputedStyle(bannerImage)
-      .getPropertyValue("background-image");
-    const bannerImageUrl = bannerBgImage.replace(
-      /url\(['"]?(.*?)['"]?\)/i,
-      "$1"
-    );
-
-    const img = new Image();
-    img.onload = () => {
+    handleImageLoading(bannerImage);
+    // Remove banner overlay when the image is loaded
+    bannerImage.addEventListener("load", () => {
       removeBannerLoadingScreen(bannerOverlay);
-    };
-    img.onerror = () => {
-      console.error("Failed to load banner image");
-      removeBannerLoadingScreen(bannerOverlay);
-    };
-    img.src = bannerImageUrl;
+    });
   } else {
     removeBannerLoadingScreen(bannerOverlay);
   }
@@ -461,21 +483,7 @@ function handleLoadingEffects() {
       '[id^="explanation-img"]'
     );
     imageElements.forEach((element) => {
-      const shimmer = addEnhancedShimmeringEffect(element);
-      const bgImage = window
-        .getComputedStyle(element)
-        .getPropertyValue("background-image");
-      const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
-
-      const img = new Image();
-      img.onload = () => {
-        removeShimmeringEffect(element, shimmer);
-      };
-      img.onerror = () => {
-        console.error(`Failed to load image: ${imageUrl}`);
-        removeShimmeringEffect(element, shimmer);
-      };
-      img.src = imageUrl;
+      handleImageLoading(element);
     });
   }
 }
