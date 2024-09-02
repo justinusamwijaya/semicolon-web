@@ -310,11 +310,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function addBannerLoadingScreen() {
   const overlay = document.createElement("div");
   overlay.id = "banner-loading-overlay";
-  overlay.style.position = "absolute";
+  overlay.style.position = "fixed";
   overlay.style.top = "0";
   overlay.style.left = "0";
   overlay.style.width = "100vw";
-  overlay.style.height = "600vh"; // Match the height of your banner
+  overlay.style.height = "100vh"; // Match the height of your banner
   overlay.style.backgroundColor = "rgba(255, 255, 255, .8)";
   overlay.style.display = "flex";
   overlay.style.flexDirection = "column";
