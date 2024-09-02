@@ -370,6 +370,70 @@ function removeBannerLoadingScreen(overlay) {
   }, 500);
 }
 
+// Function to add loading screen for banner
+function addBannerLoadingScreen() {
+  const overlay = document.createElement("div");
+  overlay.id = "banner-loading-overlay";
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100vw";
+  overlay.style.height = "100vh";
+  overlay.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+  overlay.style.display = "flex";
+  overlay.style.flexDirection = "column";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.zIndex = "10000";
+
+  const logo = document.createElement("div");
+  logo.style.width = "200px";
+  logo.style.height = "30px";
+  logo.style.marginBottom = "20px";
+  logo.style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent(
+    LOGO_TEXT_SVG
+  )}")`;
+  logo.style.backgroundSize = "cover";
+  logo.style.backgroundPosition = "center";
+  logo.style.filter = "invert(1) brightness(0)";
+
+  const spinner = document.createElement("div");
+  spinner.style.border = "5px solid #f3f3f3";
+  spinner.style.borderTop = "5px solid #3498db";
+  spinner.style.borderRadius = "50%";
+  spinner.style.width = "50px";
+  spinner.style.height = "50px";
+  spinner.style.animation = "spin 1s linear infinite";
+
+  overlay.appendChild(logo);
+  overlay.appendChild(spinner);
+  document.body.appendChild(overlay);
+
+  // Add keyframes for spinner animation if not already added
+  if (!document.querySelector("style[data-spinner-style]")) {
+    const style = document.createElement("style");
+    style.setAttribute("data-spinner-style", "");
+    style.textContent = `
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  return overlay;
+}
+
+// Function to remove banner loading screen
+function removeBannerLoadingScreen(overlay) {
+  overlay.style.opacity = "0";
+  overlay.style.transition = "opacity 0.5s ease-out";
+  setTimeout(() => {
+    overlay.remove();
+  }, 500);
+}
+
 // Function to add enhanced shimmering effect to unloaded images
 function addEnhancedShimmeringEffect(element) {
   const shimmer = document.createElement("div");
@@ -379,7 +443,7 @@ function addEnhancedShimmeringEffect(element) {
   shimmer.style.left = "0";
   shimmer.style.width = "100%";
   shimmer.style.height = "100%";
-  shimmer.style.backgroundColor = "#e0e0e0"; // Gray background
+  shimmer.style.backgroundColor = "#e0e0e0";
   shimmer.style.backgroundImage = `
     linear-gradient(
       to right,
@@ -428,9 +492,30 @@ function removeShimmeringEffect(element) {
 }
 
 // Function to handle image loading with shimmering effect
-function handleImageLoading(element, imageUrl) {
+function handleImageLoading(element) {
+  // Check if we've already processed this element
+  if (element.dataset.shimmerProcessed === "true") {
+    return;
+  }
+
+  const bgImage = window
+    .getComputedStyle(element)
+    .getPropertyValue("background-image");
+  const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
+
+  // If there's no image, don't proceed
+  if (imageUrl === "none" || imageUrl === "") {
+    return;
+  }
+
+  // Mark the element as processed
+  element.dataset.shimmerProcessed = "true";
+
+  // Remove any existing background image
+  element.style.backgroundImage = "none";
+
   // Add shimmering effect
-  const shimmer = addEnhancedShimmeringEffect(element);
+  addEnhancedShimmeringEffect(element);
 
   const img = new Image();
   img.onload = () => {
@@ -441,6 +526,7 @@ function handleImageLoading(element, imageUrl) {
     console.error(`Failed to load image: ${imageUrl}`);
     removeShimmeringEffect(element);
   };
+  console.log({ imageUrl });
   img.src = imageUrl;
 }
 
@@ -453,42 +539,18 @@ function observeBackgroundImageChanges(element) {
         mutation.attributeName === "style"
       ) {
         const newBackgroundImage = element.style.backgroundImage;
-        if (newBackgroundImage && newBackgroundImage !== "none") {
-          const imageUrl = newBackgroundImage.replace(
-            /url\(['"]?(.*?)['"]?\)/i,
-            "$1"
-          );
-          handleImageLoading(element, imageUrl);
+        if (
+          newBackgroundImage &&
+          newBackgroundImage !== "none" &&
+          element.dataset.shimmerProcessed !== "true"
+        ) {
+          handleImageLoading(element);
         }
       }
     });
   });
 
   observer.observe(element, { attributes: true, attributeFilter: ["style"] });
-}
-
-// Function to handle image loading with shimmering effect
-function handleImageLoading(element) {
-  const bgImage = window
-    .getComputedStyle(element)
-    .getPropertyValue("background-image");
-  const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
-
-  // Remove any existing background image
-  element.style.backgroundImage = "none";
-
-  // Add shimmering effect
-  addEnhancedShimmeringEffect(element);
-
-  const img = new Image();
-  img.onload = () => {
-    setLoadedImage(element, imageUrl);
-  };
-  img.onerror = () => {
-    console.error(`Failed to load image: ${imageUrl}`);
-    // Optionally, you can set a placeholder image or leave the shimmer effect
-  };
-  img.src = imageUrl;
 }
 
 // Main function to handle loading and shimmering effects
@@ -526,15 +588,47 @@ function handleLoadingEffects() {
       '[id^="explanation-img"]'
     );
     imageElements.forEach((element) => {
-      const bgImage = window
-        .getComputedStyle(element)
-        .getPropertyValue("background-image");
-      const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, "$1");
-      handleImageLoading(element, imageUrl);
+      handleImageLoading(element);
       observeBackgroundImageChanges(element);
+    });
+  }
+
+  // Handle mobile carousel images
+  const mobileCarousel = document.getElementById("mobile-carousel");
+  if (mobileCarousel) {
+    const carouselItems = mobileCarousel.querySelectorAll(".carousel-item");
+    carouselItems.forEach((item) => {
+      const imgElement = item.querySelector('[id^="explanation-img"]');
+      if (imgElement) {
+        handleImageLoading(imgElement);
+        observeBackgroundImageChanges(imgElement);
+      }
     });
   }
 }
 
 // Call the function when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", handleLoadingEffects);
+
+// Reapply shimmering effect on window resize (for responsive design)
+window.addEventListener("resize", () => {
+  const howWeDoItSection = document.getElementById("how-we-do-it-section");
+  const mobileCarousel = document.getElementById("mobile-carousel");
+
+  if (howWeDoItSection) {
+    const imageElements = howWeDoItSection.querySelectorAll(
+      '[id^="explanation-img"]'
+    );
+    imageElements.forEach(handleImageLoading);
+  }
+
+  if (mobileCarousel) {
+    const carouselItems = mobileCarousel.querySelectorAll(".carousel-item");
+    carouselItems.forEach((item) => {
+      const imgElement = item.querySelector('[id^="explanation-img"]');
+      if (imgElement) {
+        handleImageLoading(imgElement);
+      }
+    });
+  }
+});
