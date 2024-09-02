@@ -111,7 +111,6 @@ function updateStep(index) {
   steps[currentStepIndex].classList.add("selected");
   updateExplanationCard(currentStepIndex);
 }
-
 function updateExplanationCard(index) {
   const explanationCard = document.getElementById("explanation-card");
   const explanationImg = document.getElementById("explanation-img");
@@ -127,12 +126,33 @@ function updateExplanationCard(index) {
     return;
 
   explanationCard.style.opacity = 0;
-  explanationImg.style.backgroundImage = `url('${stepInfo[index].image}')`;
+
+  // Reset the shimmer processed flag
+  explanationImg.dataset.shimmerProcessed = "false";
+
+  // Remove the background image first
+  explanationImg.style.backgroundImage = "none";
+
+  // Add shimmering effect
+  addEnhancedShimmeringEffect(explanationImg);
+
+  // Set new content
   explanationTitle.textContent = stepInfo[index].title;
   explanationText.textContent = stepInfo[index].text;
-  explanationCard.style.opacity = 1;
 
-  handleImageLoading(explanationCard);
+  // Load the new image
+  const img = new Image();
+  img.onload = () => {
+    explanationImg.style.backgroundImage = `url('${stepInfo[index].image}')`;
+    removeShimmeringEffect(explanationImg);
+    explanationCard.style.opacity = 1;
+  };
+  img.onerror = () => {
+    console.error(`Failed to load image: ${stepInfo[index].image}`);
+    removeShimmeringEffect(explanationImg);
+    explanationCard.style.opacity = 1;
+  };
+  img.src = stepInfo[index].image;
 }
 
 // Mobile carousel functionality
@@ -528,31 +548,7 @@ function handleImageLoading(element) {
     console.error(`Failed to load image: ${imageUrl}`);
     removeShimmeringEffect(element);
   };
-  console.log({ imageUrl });
   img.src = imageUrl;
-}
-
-// Function to observe changes in background image
-function observeBackgroundImageChanges(element) {
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.attributeName === "style"
-      ) {
-        const newBackgroundImage = element.style.backgroundImage;
-        if (
-          newBackgroundImage &&
-          newBackgroundImage !== "none" &&
-          element.dataset.shimmerProcessed !== "true"
-        ) {
-          handleImageLoading(element);
-        }
-      }
-    });
-  });
-
-  observer.observe(element, { attributes: true, attributeFilter: ["style"] });
 }
 
 // Main function to handle loading and shimmering effects
