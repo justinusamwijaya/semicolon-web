@@ -139,9 +139,9 @@ function updateExplanationCard(index) {
   img.src = stepInfo[index].image;
 
   if (img.complete) {
-    removeShimmeringEffect(explanationImg);
     // Image is already cached, apply it immediately
     explanationImg.style.backgroundImage = `url('${stepInfo[index].image}')`;
+    removeShimmeringEffect(explanationImg);
     explanationCard.style.opacity = 1;
   } else {
     // Image needs to be loaded, apply shimmering effect
