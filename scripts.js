@@ -173,7 +173,7 @@ function initMobileCarousel() {
     const item = document.createElement("div");
     item.className = "carousel-item";
     item.innerHTML = `
-      <div class="explanation-img" style="background-image: url('${step.image}')"></div>
+      <div class="explanation-img-mobile" style="background-image: url('${step.image}')"></div>
       <h2>${step.title}</h2>
       <p>${step.text}</p>
     `;
@@ -597,7 +597,7 @@ function handleLoadingEffects() {
   if (mobileCarousel) {
     const carouselItems = mobileCarousel.querySelectorAll(".carousel-item");
     carouselItems.forEach((item) => {
-      const imgElement = item.querySelector('[class^="explanation-img"]');
+      const imgElement = item.querySelector('[class^="explanation-img-mobile"]');
       if (imgElement) {
         handleImageLoading(imgElement);
         // observeBackgroundImageChanges(imgElement);
@@ -624,7 +624,7 @@ window.addEventListener("resize", () => {
   if (mobileCarousel) {
     const carouselItems = mobileCarousel.querySelectorAll(".carousel-item");
     carouselItems.forEach((item) => {
-      const imgElement = item.querySelector('[class^="explanation-img"]');
+      const imgElement = item.querySelector('[class^="explanation-img-mobile"]');
       if (imgElement) {
         handleImageLoading(imgElement);
       }
