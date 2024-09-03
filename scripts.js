@@ -113,10 +113,10 @@ function updateStep(index) {
 }
 function updateExplanationCard(index) {
   const explanationCard = document.getElementById("explanation-card");
-  const explanationImg = document.getElementById("explanation-img");
+  const explanationImg = document.querySelector(".explanation-img");
   const explanationTitle = document.getElementById("explanation-title");
   const explanationText = document.getElementById("explanation-text");
-
+  console.log({explanationImg})
   if (
     !explanationCard ||
     !explanationImg ||
@@ -173,7 +173,7 @@ function initMobileCarousel() {
     const item = document.createElement("div");
     item.className = "carousel-item";
     item.innerHTML = `
-      <div id="explanation-img" style="background-image: url('${step.image}')"></div>
+      <div class="explanation-img" style="background-image: url('${step.image}')"></div>
       <h2>${step.title}</h2>
       <p>${step.text}</p>
     `;
@@ -477,6 +477,7 @@ function addEnhancedShimmeringEffect(element) {
   shimmer.style.backgroundSize = "200% 100%";
   shimmer.style.animation = "shimmer 1.5s infinite";
   shimmer.style.zIndex = "1";
+  shimmer.style.borderRadius = "8px";
 
   element.style.position = "relative";
   element.appendChild(shimmer);
@@ -583,11 +584,11 @@ function handleLoadingEffects() {
   const howWeDoItSection = document.getElementById("how-we-do-it-section");
   if (howWeDoItSection) {
     const imageElements = howWeDoItSection.querySelectorAll(
-      '[id^="explanation-img"]'
+      '[class^="explanation-img"]'
     );
     imageElements.forEach((element) => {
       handleImageLoading(element);
-      observeBackgroundImageChanges(element);
+      // observeBackgroundImageChanges(element);
     });
   }
 
@@ -596,10 +597,10 @@ function handleLoadingEffects() {
   if (mobileCarousel) {
     const carouselItems = mobileCarousel.querySelectorAll(".carousel-item");
     carouselItems.forEach((item) => {
-      const imgElement = item.querySelector('[id^="explanation-img"]');
+      const imgElement = item.querySelector('[class^="explanation-img"]');
       if (imgElement) {
         handleImageLoading(imgElement);
-        observeBackgroundImageChanges(imgElement);
+        // observeBackgroundImageChanges(imgElement);
       }
     });
   }
@@ -615,7 +616,7 @@ window.addEventListener("resize", () => {
 
   if (howWeDoItSection) {
     const imageElements = howWeDoItSection.querySelectorAll(
-      '[id^="explanation-img"]'
+      '[class^="explanation-img"]'
     );
     imageElements.forEach(handleImageLoading);
   }
@@ -623,7 +624,7 @@ window.addEventListener("resize", () => {
   if (mobileCarousel) {
     const carouselItems = mobileCarousel.querySelectorAll(".carousel-item");
     carouselItems.forEach((item) => {
-      const imgElement = item.querySelector('[id^="explanation-img"]');
+      const imgElement = item.querySelector('[class^="explanation-img"]');
       if (imgElement) {
         handleImageLoading(imgElement);
       }
