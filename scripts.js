@@ -91,6 +91,15 @@ const stepInfo = [
   },
 ];
 
+stepInfo.forEach((step, index) => {
+  let img = new Image();
+  img.src = step.image;
+
+  img.onload = () => {
+    // console.log({img})
+  };
+})
+
 let rotationInterval;
 let rotationTimeout;
 
@@ -116,43 +125,40 @@ function updateExplanationCard(index) {
   const explanationImg = document.querySelector(".explanation-img");
   const explanationTitle = document.getElementById("explanation-title");
   const explanationText = document.getElementById("explanation-text");
-  console.log({explanationImg})
-  if (
-    !explanationCard ||
-    !explanationImg ||
-    !explanationTitle ||
-    !explanationText
-  )
-    return;
+
+  if (!explanationCard || !explanationImg || !explanationTitle || !explanationText) return;
 
   explanationCard.style.opacity = 0;
-
-  // Reset the shimmer processed flag
-  explanationImg.dataset.shimmerProcessed = "false";
-
-  // Remove the background image first
-  explanationImg.style.backgroundImage = "none";
-
-  // Add shimmering effect
-  addEnhancedShimmeringEffect(explanationImg);
 
   // Set new content
   explanationTitle.textContent = stepInfo[index].title;
   explanationText.textContent = stepInfo[index].text;
 
-  // Load the new image
+  // Check if the image is already cached
   const img = new Image();
-  img.onload = () => {
-    explanationImg.style.backgroundImage = `url('${stepInfo[index].image}')`;
-    removeShimmeringEffect(explanationImg);
-    explanationCard.style.opacity = 1;
-  };
-  img.onerror = () => {
-    console.error(`Failed to load image: ${stepInfo[index].image}`);
-    removeShimmeringEffect(explanationImg);
-    explanationCard.style.opacity = 1;
-  };
   img.src = stepInfo[index].image;
+
+  if (img.complete) {
+    // Image is already cached, apply it immediately
+    explanationImg.style.backgroundImage = `url('${stepInfo[index].image}')`;
+    explanationCard.style.opacity = 1;
+  } else {
+    // Image needs to be loaded, apply shimmering effect
+    explanationImg.style.backgroundImage = 'none';
+    addEnhancedShimmeringEffect(explanationImg);
+
+    img.onload = () => {
+      explanationImg.style.backgroundImage = `url('${stepInfo[index].image}')`;
+      removeShimmeringEffect(explanationImg);
+      explanationCard.style.opacity = 1;
+    };
+
+    img.onerror = () => {
+      console.error(`Failed to load image: ${stepInfo[index].image}`);
+      removeShimmeringEffect(explanationImg);
+      explanationCard.style.opacity = 1;
+    };
+  }
 }
 
 // Mobile carousel functionality
