@@ -311,13 +311,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Initialize mobile carousel if on mobile
-  if (window.innerWidth <= 570) {
+  if (window.innerWidth <= 600) {
     initMobileCarousel();
   }
 
   // Handle window resize for mobile carousel
   window.addEventListener("resize", () => {
-    if (window.innerWidth <= 570) {
+    if (window.innerWidth <= 600) {
       const carouselItems = document.querySelector(
         "#mobile-carousel .carousel-items"
       );
@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function addBannerLoadingScreen() {
   const overlay = document.createElement("div");
   overlay.id = "banner-loading-overlay";
-  overlay.style.position = "absolute";
+  overlay.style.position = "fixed";
   overlay.style.top = "0";
   overlay.style.left = "0";
   overlay.style.width = "100vw";
