@@ -484,7 +484,8 @@ main {
   transition: opacity 0.5s ease;
 }
 
-.explanation-img, .explanation-img-mobile {
+.explanation-img,
+.explanation-img-mobile {
   transition: background-image 0.5s ease;
 }
 
