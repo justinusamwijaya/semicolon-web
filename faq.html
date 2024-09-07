@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semicolon</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="articles-styles.css" />
+    <link rel="stylesheet" href="faq-styles.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -94,41 +94,30 @@
       <div id="banner-section" class="transparent-nav">
         <div class="hero-banner about">
           <div class="hero-content content-container">
-            <h1>Tech <span style="color: #0075ff">Insights</span></h1>
+            <h1>
+              Frequently <span style="color: #0075ff">Asked Question</span>
+            </h1>
+            <div class="search-container">
+                <input type="text" id="faq-search" placeholder="Search for anything (keywords, topics, questions)">
+                <button id="search-button">
+                    <img src="./assets/search-icon.svg" alt="Search">
+                </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- article list section  -->
-      <div class="articles-wrapper">
+      <div class="faq-wrapper">
         <div
           style="
             width: 100%;
-            display: flex;
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
           "
         >
-          <div class="spinner"></div>
-        </div>
-        <!-- <div class="article-preview">
-          <p class="article-title-preview">
-            Masa Depan AI di Indonesia: Tantangan atau peluang?
-          </p>
-          <p class="article-body-preview">
-            Dalam beberapa tahun terakhir, AI (Artificial Intelligence atau
-            kecerdasan buatan) telah menjadi salah satu teknologi paling
-            berpengaruh di dunia, termasuk di Indonesia. Dengan semakin
-            banyaknya perusahaan yang mengadopsi AI, penting bagi bisnis untuk
-            memahami bagaimana teknologi ini dapat membantu untuk tetap
-            kompetitif di tengah persaingan bisnis yang cukup ketat saat ini.
-          </p>
-          <p class="article-read-more-wrapper-preview">
-            <a class="article-read-more" href="?article=YiBDWGVhRxhAuB3"
-              >Read more</a
-            >
-          </p>
-        </div> -->
+
       </div>
     </main>
 
@@ -150,7 +139,7 @@
       </div>
     </footer>
     <script src="scripts.js"></script>
-    <script src="articles.js"></script>
+    <script src="faq.js"></script>
 
     <!-- HubSpot Conversations API initialization -->
     <script src="hubspot.js"></script>

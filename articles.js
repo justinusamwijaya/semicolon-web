@@ -84,11 +84,13 @@ function renderArticlePreviews() {
     const articlePreview = document.createElement("div");
     articlePreview.className = "article-preview";
     articlePreview.innerHTML = `
-      <div class="article-image" style="
-      background-image: url('./assets/${article.img}.jpg');">
+      <div class='article-preview-body'>
+        <div class="article-image" style="
+        background-image: url('./assets/${article.img}.jpg');">
+        </div>
+        <h2 class="article-title-preview">${article.title}</h2>
+        <p class="article-body-preview">${article.preview}</p>
       </div>
-      <h2 class="article-title-preview">${article.title}</h2>
-      <p class="article-body-preview">${article.preview}</p>
       <div class="article-read-more-wrapper-preview">
         <a href="?article=${article.id}" class="article-read-more">Read more</a>
       </div>
