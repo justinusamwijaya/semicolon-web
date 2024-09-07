@@ -454,7 +454,7 @@ main {
   opacity: 1 !important;
 }
 
-#how-we-do-it-steps #explanation-card #explanation-img {
+#how-we-do-it-steps #explanation-card .explanation-img {
   height: 260px;
   width: 100%;
   border-radius: 8px;
@@ -484,7 +484,7 @@ main {
   transition: opacity 0.5s ease;
 }
 
-#explanation-img {
+.explanation-img, .explanation-img-mobile {
   transition: background-image 0.5s ease;
 }
 
@@ -818,7 +818,7 @@ main {
     width: 70%;
   }
 
-  #how-we-do-it-steps #explanation-card #explanation-img {
+  #how-we-do-it-steps #explanation-card .explanation-img {
     height: 200px;
   }
 
@@ -1035,7 +1035,7 @@ main {
     box-shadow: 0px 0px 5px 0px rgba(199, 199, 199, 1);
   }
 
-  .carousel-item #explanation-img {
+  .carousel-item .explanation-img-mobile {
     height: 200px;
     width: 100%;
     background-size: cover;
