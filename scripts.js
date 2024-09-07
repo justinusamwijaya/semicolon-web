@@ -194,7 +194,7 @@ function initMobileCarousel() {
   setupTouchListeners();
   startCarouselRotation();
 }
-
+updateNavbar();
 function updateCarousel() {
   const carouselItems = document.querySelector(
     "#mobile-carousel .carousel-items"
