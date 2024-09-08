@@ -92,6 +92,7 @@
 }
 
 #faq-search {
+  height: 50px;
   width: 100%;
   padding: 10px 15px;
   font-size: 16px;
@@ -101,6 +102,7 @@
 }
 
 #search-button {
+  height: 50px;
   background-color: #0075ff;
   border: none;
   padding: 12px 20px;
@@ -140,10 +142,12 @@
   }
 
   #faq-search {
+    height: 35px;
     font-size: 14px;
   }
 
   #search-button {
+    height: 35px;
     padding: 10px 15px;
   }
 
